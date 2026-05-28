@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Portfolio
 
 A scalable, content-driven portfolio site built with **Next.js 15 (App Router)**, **MDX** for case studies, and **Vercel** for hosting. Dark mode default with light toggle.
@@ -171,3 +172,7 @@ npm run start    # Serve the production build locally
 - **No database** — everything is statically generated at build time.
 - **No client-side JS for content** — pages are server-rendered, fast, and SEO-friendly.
 - **One CSS file** — easier to read and tweak than a sprawling design-token system. Scale up to CSS Modules or Tailwind later if you need to.
+=======
+# portfolio
+Joaquin's tailored UI/UX design portfolio website using NextJS.
+>>>>>>> origin/main
