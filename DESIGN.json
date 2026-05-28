@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-28T00:00:00Z",
+  "title": "Design System: Joaquin Pacia Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "fg-dark": { "role": "primary", "displayName": "Ink (Dark)", "canonical": "#f5f5f5", "tonalRamp": ["#0a0a0a", "#1a1a1a", "#2e2e2e", "#474747", "#6b6b6b", "#8a8a8a", "#b5b5b5", "#f5f5f5"] },
+      "fg-light": { "role": "primary", "displayName": "Ink (Light)", "canonical": "#0a0a0a", "tonalRamp": ["#0a0a0a", "#1a1a1a", "#2e2e2e", "#474747", "#6b6b6b", "#8a8a8a", "#cccccc", "#ffffff"] },
+      "bg-dark": { "role": "neutral", "displayName": "Paper (Dark)", "canonical": "#0a0a0a", "tonalRamp": ["#0a0a0a", "#141414", "#1a1a1a", "#232323", "#2e2e2e", "#474747", "#6b6b6b", "#8a8a8a"] },
+      "bg-light": { "role": "neutral", "displayName": "Paper (Light)", "canonical": "#ffffff", "tonalRamp": ["#fafafa", "#f5f5f5", "#ededed", "#e5e5e5", "#d6d6d6", "#bcbcbc", "#8a8a8a", "#ffffff"] },
+      "fg-muted-light": { "role": "neutral", "displayName": "Muted Ink (Light)", "canonical": "#6b6b6b", "tonalRamp": ["#2e2e2e", "#474747", "#5a5a5a", "#6b6b6b", "#8a8a8a", "#a8a8a8", "#cccccc", "#e5e5e5"] },
+      "fg-muted-dark": { "role": "neutral", "displayName": "Muted Ink (Dark)", "canonical": "#8a8a8a", "tonalRamp": ["#2e2e2e", "#474747", "#6b6b6b", "#8a8a8a", "#a8a8a8", "#c4c4c4", "#dcdcdc", "#f5f5f5"] },
+      "line-light": { "role": "neutral", "displayName": "Hairline (Light)", "canonical": "#e5e5e5", "tonalRamp": ["#8a8a8a", "#bcbcbc", "#d6d6d6", "#e5e5e5", "#ededed", "#f5f5f5", "#fafafa", "#ffffff"] },
+      "line-dark": { "role": "neutral", "displayName": "Hairline (Dark)", "canonical": "#232323", "tonalRamp": ["#0a0a0a", "#141414", "#1a1a1a", "#232323", "#2e2e2e", "#474747", "#6b6b6b", "#8a8a8a"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home hero headline only, capped at 14ch, two-tone with Muted Ink em-span." },
+      "headline": { "displayName": "Headline", "purpose": "Section openers and case-study titles." },
+      "title": { "displayName": "Title", "purpose": "Prose h3 and pull-quotes." },
+      "body": { "displayName": "Body", "purpose": "All running text, constrained to ~65-75ch in the 760px narrow container." },
+      "label": { "displayName": "Label", "purpose": "Uppercase eyebrows, section labels, marquee heading. 0.15em tracking, tabular numerals on indices." }
+    },
+    "shadows": [
+      { "name": "rest", "value": "0 1px 2px rgba(0,0,0,0.04)", "purpose": "Resting shadow on the profile/preview card only." },
+      { "name": "lift", "value": "0 6px 16px rgba(0,0,0,0.08)", "purpose": "Hover lift on interactive cards." },
+      { "name": "float", "value": "0 8px 32px rgba(0,0,0,0.08)", "purpose": "Framed imagery (portrait, case cover) lifted off the wall." },
+      { "name": "overlay", "value": "0 24px 80px rgba(0,0,0,0.5)", "purpose": "Lightbox image over a dimmed backdrop. The only deep shadow in the system." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "ease", "purpose": "State transitions, 0.2s color/background, 0.3s theme swap." },
+      { "name": "marquee", "value": "32s linear infinite", "purpose": "Continuous seamless tools-marquee scroll, no hover-pause." }
+    ],
+    "breakpoints": [
+      { "name": "narrow", "value": "760px" },
+      { "name": "container", "value": "1200px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Contact Pill Button",
+      "kind": "button",
+      "refersTo": "button-pill",
+      "description": "Outlined pill that inverts to solid Ink on hover. Used for contact and CTA links.",
+      "html": "<a class=\"ds-btn-pill\" href=\"#\">Get in touch</a>",
+      "css": ".ds-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; padding: 0.9rem 1.75rem; border: 1px solid var(--fg, #0a0a0a); border-radius: 999px; color: var(--fg, #0a0a0a); background: transparent; transition: all 0.2s ease; } .ds-btn-pill:hover { background: var(--fg, #0a0a0a); color: var(--bg, #fff); } .ds-btn-pill:focus-visible { outline: 2px solid var(--fg, #0a0a0a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Outcome Card",
+      "kind": "card",
+      "refersTo": "outcome-card",
+      "description": "Square-cornered, flat, border-only stat card. Big Ink stat over Muted Ink description.",
+      "html": "<div class=\"ds-outcome-card\"><div class=\"ds-stat\">90%</div><div class=\"ds-desc\">Grade on the final cut, with positive feedback on narrative structure and production quality.</div></div>",
+      "css": ".ds-outcome-card { border: 1px solid var(--line, #e5e5e5); padding: 2rem; background: var(--bg, #fff); } .ds-stat { font-size: 2.5rem; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 0.5rem; color: var(--fg, #0a0a0a); } .ds-desc { font-size: 0.9rem; color: var(--fg-muted, #6b6b6b); line-height: 1.5; }"
+    },
+    {
+      "name": "Theme Toggle",
+      "kind": "button",
+      "refersTo": "button-pill",
+      "description": "Circular icon button, Muted Ink at rest, Hover Wash background and Ink icon on hover.",
+      "html": "<button class=\"ds-theme-toggle\" aria-label=\"Toggle theme\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41\"/></svg></button>",
+      "css": ".ds-theme-toggle { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; color: var(--fg-muted, #6b6b6b); background: transparent; border: none; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease; } .ds-theme-toggle:hover { color: var(--fg, #0a0a0a); background: var(--hover, #f5f5f5); } .ds-theme-toggle:focus-visible { outline: 2px solid var(--fg, #0a0a0a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "button-pill",
+      "description": "Muted Ink text link, shifts to Ink on hover. No underline, no pill, no active color.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-name\">Joaquin Pacia</span><a class=\"ds-nav-link\" href=\"#work\">Work</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 2.5rem; padding: 1.25rem 0; } .ds-nav-name { font-weight: 600; font-size: 0.95rem; letter-spacing: -0.01em; color: var(--fg, #0a0a0a); } .ds-nav-link { font-size: 0.9rem; color: var(--fg-muted, #6b6b6b); letter-spacing: -0.005em; transition: color 0.2s ease; } .ds-nav-link:hover { color: var(--fg, #0a0a0a); }"
+    },
+    {
+      "name": "Pull Quote",
+      "kind": "custom",
+      "refersTo": "outcome-card",
+      "description": "Editorial blockquote with the system's only intentional 2px left border. Scoped to long-form prose.",
+      "html": "<blockquote class=\"ds-pullquote\"><p>Your decision to focus on the founders' journey strengthens the emotional appeal.</p><cite>Professor Luke Russell, CCT453</cite></blockquote>",
+      "css": ".ds-pullquote { border-left: 2px solid var(--fg, #0a0a0a); padding-left: 2rem; margin: 2.5rem 0; font-size: 1.5rem; font-weight: 500; line-height: 1.35; letter-spacing: -0.015em; color: var(--fg, #0a0a0a); } .ds-pullquote cite { display: block; font-style: normal; font-size: 0.85rem; color: var(--fg-muted, #6b6b6b); font-weight: 400; margin-top: 1rem; }"
+    },
+    {
+      "name": "Section Label",
+      "kind": "custom",
+      "refersTo": "outcome-card",
+      "description": "Uppercase micro-label with wide tracking. Marks sections and eyebrows.",
+      "html": "<span class=\"ds-section-label\">The Challenge</span>",
+      "css": ".ds-section-label { display: block; font-size: 0.75rem; color: var(--fg-muted, #6b6b6b); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 500; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Gallery",
+    "overview": "The work hangs on a neutral wall. The site is the frame, not the painting. Every choice recedes so the case studies hold the visitor's eye; whitespace is the matting, monochrome is the gallery's refusal to compete with the art. The system is achromatic by doctrine: no brand color, no accent hue, no gradient. Contrast does the work color usually does. Type is a single family, Inter, worked hard across weight and scale. Motion is minimal and exponential, present only to confirm a state change. It rejects template-portfolio shells, Dribbble-bait over-design, corporate-SaaS cliche, and dev-bro neon; the dark default reads quiet and editorial, never hacker terminal.",
+    "keyCharacteristics": [
+      "Achromatic: contrast carries meaning, not hue.",
+      "Single typeface (Inter), wide weight and scale range.",
+      "Generous, varied whitespace as the primary compositional tool.",
+      "Hairline borders (1px) structure the page; flat at rest.",
+      "Dark by default, light by toggle, both equally considered."
+    ],
+    "rules": [
+      { "name": "The No-Hue Rule", "body": "This portfolio has no brand color and never will. If a screen needs emphasis, it comes from weight, scale, or the Ink-on-Paper inversion, never from introducing a hue.", "section": "colors" },
+      { "name": "The Inversion Rule", "body": "Emphasis at maximum strength is a full Ink/Paper swap (pill button hover, text selection), not a tint. The flip is the loudest move the system permits.", "section": "colors" },
+      { "name": "The One-Family Rule", "body": "Inter carries the entire system. Adding a second typeface is prohibited; the answer to 'needs more personality' is more weight or scale, not more fonts.", "section": "typography" },
+      { "name": "The Two-Tone Headline Rule", "body": "Hero emphasis uses Muted Ink on part of the headline, never italics, never color.", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "Cards, list rows, and containers carry zero shadow until the user touches them. If a surface has an ambient shadow with no interaction behind it, remove it; let the Hairline border define the edge.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do carry the entire palette as Ink-on-Paper plus four neutrals. Emphasis is weight, scale, or the full Ink/Paper inversion.",
+      "Do keep surfaces flat at rest; introduce shadow only on hover, float, or overlay.",
+      "Do use 1px Hairline borders and the Paper/Riser tonal step for structure.",
+      "Do push Inter hard across weight (400-600) and scale (0.75rem to 5rem); maintain at least a 1.25 ratio between hierarchy steps.",
+      "Do set uppercase micro-labels at 0.15em tracking and use tabular numerals for indices and stats.",
+      "Do constrain running text to the 760px narrow container so body measure stays 65-75ch.",
+      "Do honor prefers-reduced-motion on the marquee and all transitions (WCAG AA)."
+    ],
+    "donts": [
+      "Don't introduce any brand color, accent hue, or gradient. The No-Hue Rule is absolute.",
+      "Don't use background-clip: text gradient text, glassmorphism as decoration, or the hero-metric template.",
+      "Don't build identical icon-heading-text card grids, the corporate-SaaS cliche.",
+      "Don't let the dark default drift toward dev-bro neon: no terminal green, no neon accents.",
+      "Don't add a colored border-left stripe to cards or callouts. The one 2px left border is the editorial pull-quote.",
+      "Don't add a second typeface.",
+      "Don't nest cards, and don't wrap content in a container that does not need one.",
+      "Don't ship a template-portfolio or Dribbble-bait look."
+    ]
+  }
+}
