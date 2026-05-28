@@ -1,0 +1,95 @@
+---
+title: "Crunchyroll Reimagined"
+summary: "Redesigned the conversion experience for the world's largest anime platform — replacing a pricing-first homepage with a content-first prototype built in React."
+client: "Self-directed"
+role: "UX Researcher & Designer"
+timeline: "3 weeks"
+year: "2026"
+tag: "Web · UX Design"
+order: 1
+cover: "/project-one-img/Image of Crunchyroll redesign hero component.png"
+outcomes:
+    - stat: "8"
+      desc: "User interviews with non-subscribing anime fans"
+    - stat: "5"
+      desc: "Root problems identified across research, audit, and secondary data"
+    - stat: "4"
+      desc: "Design directions built into a working React prototype"
+---
+
+<SectionLabel>The Challenge</SectionLabel>
+
+## Crunchyroll has 21 million subscribers — and still can't convince anime fans to pay.
+
+Crunchyroll is the world's largest dedicated anime streaming platform. It has the catalog, the simulcasts, and the community. And yet a consistent pattern kept appearing: anime fans who _could_ subscribe don't. They stay on piracy sites, share accounts, or churn shortly after signing up. The question this project set out to answer was: **why?**
+
+The answer wasn't the content. It was the pitch. When I audited the site in early May 2026, the first thing a visitor saw was a pricing comparison table with a countdown timer — before a single trailer, a single series, or a single reason to care. The homepage was designed for someone who had already decided to subscribe. The majority of visitors hadn't decided yet. The site gave them nothing to help them decide.
+
+The goal was to redesign the key conversion touchpoints — homepage, paywall, onboarding, post-purchase — around a single principle borrowed from Gabe Newell: **build value before you pitch it.** Show people why anime matters. Let the platform speak for itself. Only introduce the subscription model at the moment when a user has something to lose by not paying.
+
+_Post-audit note: Crunchyroll updated their homepage to a more content-first design after this study was conducted — confirming that the pricing-first layout was a genuine problem significant enough for the platform itself to address._
+
+<SectionLabel>Research</SectionLabel>
+
+## What I learned.
+
+I conducted 8 semi-structured interviews over four days (May 8-11, 2026) with anime-watching participants who don't hold an active Crunchyroll subscription. The group included piracy pragmatists, lapsed paid subscribers, lapsed free-tier users, and people new to anime — deliberately chosen to span the full range of non-conversion reasons rather than a single segment.
+
+<Figure
+    src="/project-one-img/Image of Crunchyroll redesign affinity map.png"
+    alt="Affinity map showing five root problems"
+    caption="Eight interviews collapsed into five root problems. Every finding mapped back to one or more of these."
+/>
+
+The primary research uncovered ten themes — but five root problems drove everything:
+
+1. **A homepage that pitches instead of seduces.** Every participant reacted negatively to the pricing-first layout. Without exception.
+2. **Piracy has made "free" the default.** Five of eight participants use piracy primarily — not because they can't pay, but because the zero-friction experience has become the baseline.
+3. **Reputation damage that predates the visit.** Four participants arrived with concrete concerns about AI-assisted subtitles and employee layoffs before they'd even seen the site.
+4. **No path for the undecided.** With the free tier removed and the advertised free trial secretly replaced by immediate billing (confirmed by live audit), the platform offered exactly one entry point: pay now, with a card, upfront.
+5. **The platform has lost its social currency.** Crunchyroll's increasingly niche catalog means the shows it hosts are often things nobody in your social circle is watching — paying for content _and_ watching alone.
+
+Secondary research across App Store reviews, Reddit, Trustpilot, and PCMag validated every primary finding at scale. One specific detail from secondary research proved critical: in Fall 2025, subtitles for _Necronomico and the Cosmic Horror Show_ contained the phrase **"ChatGPT said..."** in the German track — direct evidence of AI use in localization, and the documented source of the reputation damage participants described.
+
+> "If you're here, you're here to pay. And if you're not, then you can get out."
+> — Andrew, Interview P7
+
+<SectionLabel>Process</SectionLabel>
+
+## How I got from problem to solution.
+
+The five root problems generated four design directions — each mapped to specific HMW questions and targeted at a specific user segment. Rather than produce static mockups, I built the directions as a working React + Vite prototype using Tailwind CSS and Framer Motion, deployed to Vercel. The reasoning is methodological: Newell's principle applies to the case study itself. A live prototype demonstrates value in a way a Figma comp can't.
+
+<Figure
+    src="/project-one-img/Image of Crunchyroll redesign hero section.png"
+    alt="Redesigned content-first homepage"
+    caption="Direction 01: content-first homepage. Full-bleed featured title, two CTAs (Watch Free / Start Free Trial), pricing below the fold."
+/>
+
+### Key decisions
+
+**Leading with content, not tiers.** The homepage hero was the single most consequential decision in the build. Replacing the pricing table with a full-bleed featured series meant every downstream screen could stop doing conversion work and start doing something more useful: building investment. The contextual paywalls, the plans page, the post-purchase experience — all of them became more honest once the homepage stopped pretending the user had already decided to pay.
+
+**Delaying the paywall until after investment.** The end-of-episode gate fires after Episode 1 completes, not at the door. The prompt says "Episode 2 is waiting" — framing continuity, not purchase. The trial offer explicitly says "no credit card required," addressing the sharpest single finding from the interviews: Andrew's stated condition under which he would try the platform.
+
+**The Trust Strip.** A horizontal band below the hero surfacing four proof points: first episode free (no account), human-translated subtitles (reviewed by editors, never AI), same-day simulcast, and a 14-day no-card trial. Each pillar maps directly to a root problem — the strip exists to counter the reputation damage before the user acts on it.
+
+<Figure
+    src="/project-one-img/Image of Crunchyroll redesign free episode contextual paywall for next episode.png"
+    alt="End-of-episode contextual paywall"
+    caption="Direction 03: contextual paywall. The subscription ask fires after Episode 1 ends, not at the homepage. User has 23 minutes of investment before seeing any pricing."
+/>
+
+The prototype covers the full conversion loop: content-first homepage → browse row → series detail → free episode playback → end-of-episode gate → plans page → sign-up → post-purchase welcome. All routing is handled client-side via React Router; series data is static and mocked, making the prototype reproducible without infrastructure.
+
+**[Live prototype →](https://crunchyroll-reimagined.vercel.app/)**
+
+<SectionLabel>Reflection</SectionLabel>
+
+## What I took away.
+
+The hardest problem in this case study wasn't any single screen — it was the cumulative effect of small decisions across the entire flow. The audited Crunchyroll experience read as adversarial in aggregate, even though no individual screen was catastrophic. The redesign's job was the inverse: make every screen read as cooperative, so the whole thing reads as a platform that genuinely wants you to find something to watch.
+
+The thing I'd tell my past self: commit to the thesis earlier. Once I decided the homepage would lead with content, every other decision followed naturally. The paywalls became contextual because the homepage no longer needed to do the conversion work. The trust strip made sense because the homepage was already welcoming the undecided. The principle governed — I just had to trust it sooner.
+
+The planned next step is to run usability tests on the built prototype with the same participant pool: put the new screens in front of the same people who critiqued the old ones and measure whether the redesign actually reduces friction and shifts conversion intent — not just whether it looks better than a pricing table.
