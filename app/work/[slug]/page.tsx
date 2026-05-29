@@ -1,14 +1,19 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllWorkSlugs, getWorkBySlug, getAdjacentWork, toEmbedUrl } from "@/lib/content";
+import {
+    getAllWorkSlugs,
+    getWorkBySlug,
+    getAdjacentWork,
+    toEmbedUrl,
+} from "@/lib/content";
 import { mdxComponents } from "@/components/MDXComponents";
 import { Footer } from "@/components/Footer";
 import { Lightbox } from "@/components/Lightbox";
 import type { Metadata } from "next";
 
 type PageProps = {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -17,8 +22,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
     params,
-}: PageProps): Promise<Metadata> {
-    const { slug } = params;
+}: {
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
     const work = getWorkBySlug(slug);
     if (!work) return {};
     return {
@@ -28,7 +35,7 @@ export async function generateMetadata({
 }
 
 export default async function CaseStudyPage({ params }: PageProps) {
-    const { slug } = params;
+    const { slug } = await params;
     const work = getWorkBySlug(slug);
 
     if (!work) notFound();
@@ -97,15 +104,21 @@ export default async function CaseStudyPage({ params }: PageProps) {
                             <>
                                 <div
                                     className="case-cover-blur"
-                                    style={{ backgroundImage: `url("${frontmatter.cover}")` }}
+                                    style={{
+                                        backgroundImage: `url("${frontmatter.cover}")`,
+                                    }}
                                 />
                                 <div
                                     className="case-cover-sharp"
-                                    style={{ backgroundImage: `url("${frontmatter.cover}")` }}
+                                    style={{
+                                        backgroundImage: `url("${frontmatter.cover}")`,
+                                    }}
                                 />
                             </>
                         ) : (
-                            <span className="case-cover-placeholder">[HERO IMAGE]</span>
+                            <span className="case-cover-placeholder">
+                                [HERO IMAGE]
+                            </span>
                         )}
                     </div>
                 );
