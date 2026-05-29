@@ -16,31 +16,31 @@ colors:
   hover-dark: "#1a1a1a"
 typography:
   display:
-    fontFamily: "Schibsted Grotesk, -apple-system, BlinkMacSystemFont, sans-serif"
+    fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, sans-serif"
     fontSize: "clamp(2.5rem, 6vw, 5rem)"
     fontWeight: 600
     lineHeight: 1.05
     letterSpacing: "-0.035em"
   headline:
-    fontFamily: "Schibsted Grotesk, sans-serif"
+    fontFamily: "Manrope, sans-serif"
     fontSize: "2rem"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "-0.02em"
   title:
-    fontFamily: "Schibsted Grotesk, sans-serif"
+    fontFamily: "Manrope, sans-serif"
     fontSize: "1.4rem"
     fontWeight: 500
     lineHeight: 1.3
     letterSpacing: "-0.01em"
   body:
-    fontFamily: "Schibsted Grotesk, sans-serif"
+    fontFamily: "Manrope, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "normal"
   label:
-    fontFamily: "Schibsted Grotesk, sans-serif"
+    fontFamily: "Manrope, sans-serif"
     fontSize: "0.75rem"
     fontWeight: 500
     lineHeight: 1.4
@@ -91,7 +91,7 @@ This system explicitly rejects the template-portfolio look (interchangeable Wix/
 
 **Key Characteristics:**
 - Achromatic: contrast carries meaning, not hue.
-- Single typeface (Schibsted Grotesk), wide weight and scale range.
+- Single typeface (Manrope), wide weight and scale range.
 - Generous, varied whitespace as the primary compositional tool.
 - Hairline borders (1px) structure the page; flat at rest.
 - Dark by default, light by toggle, both equally considered.
@@ -117,10 +117,10 @@ A two-pole achromatic palette mirrored across light and dark themes. No chromati
 
 ## 3. Typography
 
-**Display / Body / Label Font:** Schibsted Grotesk (with `-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` fallback)
+**Display / Body / Label Font:** Manrope (with `-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` fallback)
 **Mono Font:** `ui-monospace, 'SF Mono', Menlo, monospace` (inline code and code blocks only)
 
-**Character:** One text grotesque doing every job. Schibsted Grotesk carries subtle character in its `a`, `g`, and `t` and ships a true italic cut. The stylistic set `ss01` is enabled globally. Personality comes from how hard the scale is pushed, not from typeface variety. Negative letter-spacing tightens large display text; wide positive tracking on uppercase micro-labels does the editorial work.
+**Character:** One humanist grotesque doing every job. Manrope's rounded terminals and generous x-height give warmth without sacrificing precision. Personality comes from how hard the scale is pushed, not from typeface variety. Negative letter-spacing tightens large display text; wide positive tracking on uppercase micro-labels does the editorial work. Prose `<em>` renders as weight 600 (no italic axis) rather than synthesized oblique.
 
 ### Hierarchy
 - **Display** (600, `clamp(2.5rem, 6vw, 5rem)`, 1.05, `-0.035em`): Home hero headline only. Capped at `14ch`. Muted Ink applied to the `<em>` span for a two-tone headline instead of italics.
@@ -130,7 +130,7 @@ A two-pole achromatic palette mirrored across light and dark themes. No chromati
 - **Label** (500, `0.75rem` to `0.8rem`, `0.15em`, UPPERCASE): Eyebrows, section labels, the tools-marquee context. Tabular numerals (`font-variant-numeric: tabular-nums`) on indices and stats.
 
 ### Named Rules
-**The One-Family Rule.** Schibsted Grotesk carries the entire system. Adding a second typeface is prohibited; the answer to "this needs more personality" is more weight or scale contrast, not more fonts.
+**The One-Family Rule.** Manrope carries the entire system. Adding a second typeface is prohibited; the answer to "this needs more personality" is more weight or scale contrast, not more fonts.
 
 **The Two-Tone Headline Rule.** Hero emphasis uses Muted Ink on part of the headline, never italics, never color. The fade from Ink to Muted Ink is the only headline ornament allowed.
 
