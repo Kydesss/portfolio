@@ -1,0 +1,225 @@
+---
+title: "Home Security System Redesign"
+summary: "Digitizing a legacy keypad home security system into a modern touchscreen console, then stress-testing it for the worst possible moment: an intruder at the door and seconds to call for help. Built and evaluated with real users across two project cycles, grounded in PSSUQ, NASA TLX, and a psychophysiological stress simulation."
+client: "University of Toronto Mississauga, CCT478: Human Factors Engineering"
+role: "UX Designer (team of 2)"
+timeline: "Two project cycles, Winter 2024"
+year: "2024"
+tag: "Tablet · UX Research · Safety"
+order: 5
+cover: "/home-security-system-redesign-img/cover.png"
+outcomes:
+    - stat: "132 bpm"
+      desc: "Measured stress heart rate in the break-in simulation, up from a 78 bpm resting baseline, confirming the disarm task runs under genuine physiological load."
+    - stat: "PSSUQ + TLX"
+      desc: "Two peer usability evaluations using the PSSUQ and NASA TLX. Temporal demand scored highest across both participants, pointing every redesign decision at speed."
+    - stat: "5"
+      desc: "Design changes shipped after testing: removed the redundant 5-second confirmation, flagged suspicious clips, added an all-clips view, passcode reset, and autoplay live feed."
+---
+
+<SectionLabel>The Challenge</SectionLabel>
+
+## A safety-critical system still running on a numeric keypad and four blinking lights.
+
+Traditional building security systems still ship with a wall-mounted numeric keypad, a single-row seven-segment LCD, and four LED status lights. We pulled one apart in preliminary research and found the interaction model badly dated. Sensor status is shown as a number on the LCD that maps to a sensor only via an external memo or the user's long-term memory, raising cognitive load. The same number scheme doubles as the error-code system, compounding the confusion. Feedback is four lights and a string of digits that, in practice, tell the user almost nothing.
+
+The stakes are not cosmetic. We argued the system is safety-critical: per FBI reporting, homes without security systems are up to 300% more likely to be burglarized, and over a million property crimes were recorded in 2021. A guide by Sampson on false burglar alarms notes that user error, such as incorrect passcode entry under a disarm timer, is a primary cause of false alarms, which also drains police resources. A poorly designed security console is not a minor usability problem. It can mean a missed break-in or a wasted police dispatch.
+
+The brief: digitally transform this legacy system into a modern touchscreen console that fixes the feedback gap, lowers cognitive load, and survives the high-pressure moments the product exists for.
+
+<SectionLabel>Context</SectionLabel>
+
+## A two-person build, then a solo stress test.
+
+This was a paired project with Matthew Ganotisi. I owned the problem framing and the justification for treating the system as safety-critical, designed the camera section of the dashboard and the individual camera pages, the add-wireless-camera flow, logs, and camera settings, and ran the second participant's evaluation. Matthew led the domain research, the keypad and chimes settings pages, and the questionnaire calculations. We co-designed the dashboard, the settings page, and the interactive prototype wiring.
+
+The work ran across two cycles. The first built the digital console, evaluated it with two peers using standardized questionnaires, and iterated on their feedback. The second was a solo deep-dive that put the disarm task under a measured stress simulation and pushed the redesign further. The console you see is the same product evolving across both.
+
+Our plan was deliberate: inventory the legacy system's features and flow, port them to a digital interface while fixing the feedback and cognitive-load problems, borrow proven patterns from modern digital security products, then prototype low-fidelity, then high-fidelity and interactive against the improved workflow.
+
+<SectionLabel>The Prototype</SectionLabel>
+
+## One dashboard for arming, cameras, and emergencies.
+
+The high-fidelity Figma prototype centers on a single dark dashboard: sensors grouped by room with live open/closed state, a camera section with named feeds, a prominent Arm control, and an Emergency Services entry point. Disarming uses a four-digit passcode (1234) entered against a visible countdown timer, replacing the legacy LCD with explicit, readable feedback at every step.
+
+<Figure
+    src="/home-security-system-redesign-img/old-dashboard.png"
+    alt="Digital security console showing sensors grouped by room, named camera feeds, an Arm button, and an Emergency Services button"
+    caption="The digital console. Sensors carry plain-language state ('Window: Open') instead of a status code, cameras are named and visible, and the Arm and Emergency Services controls are explicit, the core fix for the legacy feedback gap."
+/>
+
+<Figure
+    src="/home-security-system-redesign-img/old-disarm-keypad.png"
+    alt="Disarm screen with a four-digit passcode keypad and a red timer reading time remaining"
+    caption="Disarm: a four-digit passcode against a visible countdown. The timer is shown plainly rather than implied by beeps, but the recall-under-pressure task remained a stress point testing would later confirm."
+/>
+
+The camera section was the part I owned. Each feed opens to a live view with full camera details, and an activity strip of recent clips runs along the bottom for quick review.
+
+<SectionLabel>Evaluation</SectionLabel>
+
+## Two peers, PSSUQ and NASA TLX.
+
+We recruited two classmates to evaluate the prototype and gave each the PSSUQ and NASA TLX post-task questionnaires. Two tasks: (1) run into the house and disarm the open-door system within 20 seconds, and (2) review a suspicious clip from the front-door camera and decide whether to call emergency services.
+
+### PSSUQ
+
+Both participants landed close together, around 3.9 overall on the 7-point scale, satisfied with interface quality and confident they could recover from errors. The weak spot was consistent: questions 3 and 4, which measure how quickly and comfortably the system can be used. Usefulness and speed were the soft underbelly.
+
+<Figure
+    src="/home-security-system-redesign-img/pssuq-results.png"
+    alt="PSSUQ questionnaire response chart with participant one in red and participant two in blue marked across a 7-point agree-disagree scale"
+    caption="PSSUQ responses, participant one in red and participant two in blue. Tight agreement overall, with the lowest marks landing on the speed-of-use items, the signal that the system needed to get faster."
+/>
+
+### NASA TLX
+
+The weighted TLX told the same story from a different angle. Across both participants, temporal demand scored highest, with mental demand and frustration close behind. Both completed the tasks successfully and without much difficulty, but they felt the time pressure throughout, exactly the dimension that matters in a real emergency.
+
+<Figure
+    src="/home-security-system-redesign-img/nasa-tlx-evaluation.png"
+    alt="NASA TLX six rating scales with both participants marked, temporal demand rating high"
+    caption="NASA TLX subscale ratings from both participants. Temporal demand pins high, and the frustration and mental-demand marks line up with the PSSUQ speed-of-use complaint."
+/>
+
+The two instruments converged: the core experience was sound, but the system was too slow and too demanding under time pressure. Every iteration target followed from that.
+
+<SectionLabel>Iteration</SectionLabel>
+
+## Five changes from real user feedback.
+
+### Cut the redundant 5-second confirmation
+
+The original emergency flow asked the user to confirm ("you are about to summon the Police Department, Continue?") and then showed a second 5-second "will be summoned, press cancel to stop" overlay. Both testers cancelled a dispatch by accident because they did not realize they had to wait through that overlay. In a safety-critical flow every second counts, and a redundant secondary confirmation is a hazard, not a safeguard. We removed the 5-second overlay so Continue summons help immediately.
+
+<Figure
+    src="/home-security-system-redesign-img/emergency-5s-overlay-before.png"
+    alt="Figma flow showing the emergency confirmation dialog followed by a 5-second cancel overlay for each service"
+    caption="Before: confirm, then a second 5-second 'press cancel to stop' overlay per service. Both participants accidentally cancelled a real dispatch here."
+/>
+
+<Figure
+    src="/home-security-system-redesign-img/emergency-no-overlay-after.png"
+    alt="Figma flow showing the emergency confirmation dialog summoning the service directly with no countdown overlay"
+    caption="After: the 5-second overlay is gone. A single Continue dispatches immediately, removing the step that was costing real call attempts."
+/>
+
+### Redesign Recent Activity into Suspicious Activity
+
+Participant two never opened the flagged clip. He scanned the live feed, went back, and called the police anyway, which told us the interface was not surfacing what mattered. We replaced the neutral "Recent Activity" strip with a "Suspicious Activity" strip that outlines flagged clips in red and adds a warning symbol to pull the eye to genuine security risks.
+
+<Figure
+    src="/home-security-system-redesign-img/camera-recent-activity-before.png"
+    alt="Front door live camera feed with a generic Recent Activity strip of clip thumbnails along the bottom"
+    caption="Before: a flat 'Recent Activity' strip treats every clip the same, so the one clip that signals a break-in does not stand out."
+/>
+
+<Figure
+    src="/home-security-system-redesign-img/camera-suspicious-activity-after.png"
+    alt="Front door feed with a Suspicious Activity strip, flagged clips outlined in red with warning icons, and an All Clips button"
+    caption="After: 'Suspicious Activity' outlines flagged clips in red with a warning icon, and an All Clips button moves the full history out of the way. Risk is now visually prioritized."
+/>
+
+### Add a dedicated all-clips page
+
+Pulling routine footage out of the main view created the need for somewhere to keep it. A dedicated per-camera page holds the full clip history so the dashboard stays focused on threats without losing access to everything else.
+
+<Figure
+    src="/home-security-system-redesign-img/all-video-clips.png"
+    alt="Front Door All Video Clips page showing a grid of recorded clip thumbnails"
+    caption="The All Video Clips page: full per-camera history in a grid, separated from the threat-focused Suspicious Activity strip on the dashboard."
+/>
+
+### Fix the live-feed and playback ambiguity
+
+Participant one tried to play back clips and could not, and a play button on the live feed made users think the live stream was a recording. We added a "Watching Video" state so clip playback reads as a deliberate action, and removed the play button from the live feed so it simply autoplays.
+
+<Figure
+    src="/home-security-system-redesign-img/watching-video.png"
+    alt="Full-screen Watching Video state shown when a recorded clip is played"
+    caption="The 'Watching Video' state confirms a clip is playing, and removing the live-feed play button kills the 'is this live or recorded?' confusion."
+/>
+
+### Add passcode reset
+
+Participant two flagged that there was no way to change a passcode if a user forgot or wanted to update it. We added a passcode-change feature with a verification step for forgotten codes, available only while the system is disarmed for security.
+
+<SectionLabel>Going Deeper</SectionLabel>
+
+## Measuring the stress the disarm task actually produces.
+
+Testing kept pointing at time pressure, so the second cycle put the disarm task under a psychophysiological stress simulation rather than assuming the load. I staged a chase home: a friend played the pursuer, my phone stood in for the door keypad, my laptop for the wall console, and the task was to get inside and disarm before a 30-second timer auto-dialed emergency services.
+
+Heart rate, counted manually over 10 seconds and multiplied by six:
+
+- **Resting baseline:** 78 bpm after sitting still for three minutes.
+- **Post-simulation:** 132 bpm, taken immediately after the run.
+
+A 54 bpm jump confirms the task carries real arousal, not neutral-lab load. I was candid about the rig: we re-ran the chase to space the pursuer correctly, and a trackpad is not a wall touchscreen, both of which can shift the reading. A solo NASA TLX afterward again put temporal demand on top, consistent with the two-participant evaluation.
+
+That measurement justified three more aggressive moves on the same console.
+
+### Promote the critical controls
+
+The eye lands at the top first. I moved Arm/Disarm and Emergency Services to the top of the dashboard so the two crisis controls are found instantly instead of hunted for beneath sensors and cameras.
+
+<Figure
+    src="/home-security-system-redesign-img/cover.png"
+    alt="Redesigned console with the Arm control and Emergency Services button promoted to the top of the screen"
+    caption="Arm and Emergency Services promoted to the top, where the eye lands first. Clear visual hierarchy cuts search time in the moment it matters most."
+/>
+
+### Replace the passcode with biometrics
+
+The disarm passcode forced recall under panic, the exact condition where memory fails (participant one mis-entered it three times while visibly rushing). Swapping it for a fingerprint scan removes the recall step and shortens disarm to a single gesture against the clock.
+
+<Figure
+    src="/home-security-system-redesign-img/new-disarm-fingerprint.png"
+    alt="Redesigned disarm screen prompting a fingerprint scan with the countdown still visible"
+    caption="Biometric disarm: a fingerprint replaces the four-digit code. No recall, no typing, one gesture instead of four digits under the timer."
+/>
+
+### Enlarge the emergency picker and remove the last confirmation
+
+The small Fire/Police/Medical dropdown was easy to mis-tap with shaking hands, so I replaced it with a focused pop-up card carrying three large buttons. Building on the 5-second-overlay fix from cycle one, I also removed the remaining confirmation dialog entirely, taking the emergency call from three actions to two, with a full-screen "Emergency Services Responded" state for unambiguous feedback.
+
+<Figure
+    src="/home-security-system-redesign-img/old-emergency-dropdown.png"
+    alt="Original small dropdown listing Fire, Police, and Medical above the Emergency Services button"
+    caption="Before: a compact dropdown with small targets, easy to mis-tap under stress."
+/>
+
+<Figure
+    src="/home-security-system-redesign-img/new-emergency-popup.png"
+    alt="Redesigned pop-up card with three large Police, Fire, and Medical buttons"
+    caption="After: a centered pop-up card with three large buttons. Bigger targets, a focused window, far less room for the wrong tap."
+/>
+
+<Figure
+    src="/home-security-system-redesign-img/emergency-responded.png"
+    alt="Full-screen green confirmation reading Emergency Services Responded"
+    caption="The full-screen 'Emergency Services Responded' state. Strong, unmistakable feedback lowers the uncertainty that fuels panic."
+/>
+
+<SectionLabel>Analytics Plan</SectionLabel>
+
+## What a shipped version should track.
+
+I closed with an analytics program for a live product: five tracking categories crossed with three segments.
+
+**Track:** user engagement (session duration, screens per session, retention), navigation paths (which screens are visited and in what order, to expose mismatched mental models like hunting for camera settings in the wrong place), error rate (where and when errors cluster), system performance (load times and latency), and qualitative feedback (surveys and ratings).
+
+**Segment by:** age group, geographic location, and language. Each segment changes the read. Older users may make more errors on small targets, areas with unstable power may show error spikes from resets, and non-native speakers on an English-only system may be slower and more error-prone, which is the signal that tells you where translation and larger targets actually pay off.
+
+The throughline: navigation data turns a guess about confusion into evidence. If users repeatedly bounce from the camera page to settings looking for camera settings, that is a logged path you can fix, not a hunch.
+
+<SectionLabel>Reflection</SectionLabel>
+
+## What the project taught me.
+
+The lesson that stuck: measure before you redesign. Two standardized questionnaires and a stress simulation all pointed at the same enemy, time, and that consensus kept the work aimed at speed instead of polish that would not survive a real emergency. The PSSUQ flagged slow usability, the NASA TLX named temporal demand, and the 78-to-132 bpm jump proved the disarm task genuinely spikes the body.
+
+Watching real users was where the sharpest fixes came from. The accidental dispatch cancellations, the ignored flagged clip, the live-feed play-button confusion, none of those were visible in design review. They surfaced the moment two people actually used the thing, and they drove five concrete changes.
+
+I was also honest about the limits, and that honesty is part of the work. Two participants is a small sample, a trackpad is not a wall console, and manual pulse counting is not HRV. The redesign is well-reasoned and grounded in measurement, but the proof still lives in a larger validation pass: more participants across ages, languages, and tech literacy, real touch hardware, and a head-to-head test of the old console against the new under the same load that produced 132 bpm.

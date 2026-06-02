@@ -1,0 +1,326 @@
+---
+title: "eBay Browsing Experience Redesign"
+summary: "A full-cycle UX research and redesign project on eBay, from usability testing and five card sorts through IA restructuring, UI sketches, and a medium-fidelity prototype validated with a 95% tree test success rate."
+client: "University of Toronto Mississauga, CCT380: Human-Computer Interaction"
+role: "UX Researcher & Designer — home page lead, design consistency"
+timeline: "5 weeks"
+year: "2023"
+tag: "Web · UX Research · E-commerce"
+order: 4
+cover: "/ebay-browsing-experience-redesign-img/cover.png"
+outcomes:
+    - stat: "95%"
+      desc: "Average tree test success rate across 5 tasks on the redesigned IA, with 75% of those completed without any backtracking."
+    - stat: "5"
+      desc: "Separate card sorts conducted across the home page, all categories, electronics, headphones, and deals sections."
+    - stat: "85%"
+      desc: "Final course grade (A), with positive feedback on research methodology, IA decisions, and prototype fidelity."
+---
+
+<SectionLabel>The Challenge</SectionLabel>
+
+## eBay works. But for a first-time visitor, it barely feels like it.
+
+eBay connects buyers and sellers across 190+ markets. For experienced users, that breadth is the point. For anyone new, it's a wall. The navigation bar lists the same category in two places. The page that lets you browse everything is so dense you scroll past what you were looking for. Listings show different information depending on where you find them. Text is grey where it should be black. Auction pricing looks like a sale price until you read the fine print.
+
+None of these are catastrophic in isolation. Together, they add up to an experience that subtly erodes trust with every interaction, raising friction on the path to purchase and lowering the bar for a user to leave.
+
+The brief for this project was to evaluate eBay's human-computer interaction elements and redesign them. Our team's angle: fix the information architecture, reduce noise in the UI, and make the experience readable for all age groups, without stripping away the depth that makes eBay worth using.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/homepage-before.png"
+    alt="Original eBay homepage with cluttered navigation and grey text"
+    caption="The original eBay homepage: three stacked navigation bars, grey body text, no condition labels on listings, and the same category duplicated in two places."
+/>
+
+<SectionLabel>Research</SectionLabel>
+
+## Key insights.
+
+Research ran in three stages: usability testing to surface the friction points, card sorts to diagnose the labeling problems, and a tree test to validate the proposed IA changes before prototyping.
+
+### Usability testing
+
+Three participants tested eBay on three tasks: listing a Batman Funko Pop, finding VHS tapes under $10, and finding a white Xbox 360 in North America. Participant profiles were chosen deliberately: a tech-literate new user, a tech-literate experienced eBay seller/buyer, and a tech-illiterate new user. This mix surfaced both the onboarding experience and the expert experience.
+
+Key findings across all three:
+
+- All users missed the Sell label on first scan. It was too small and lacked visual weight compared to the surrounding elements.
+- All users defaulted to the search bar for browsing tasks, treating categories as a fallback rather than a primary navigation tool.
+- When categories were used, they caused confusion; one user navigated into the wrong electronic subcategory before backtracking.
+- Auction listings were the biggest point of confusion. "Or Best Offer," number of bids, and time remaining were all grey on white, easy to miss and easy to misread as a fixed price.
+
+Most users rated eBay 9 out of 10 and described only minor inconveniences. That result was instructive: the site's core functionality isn't broken. The problems are in the details that accumulate.
+
+I built a follow-up survey that reinforced this. Of 12 responses, 83.3% rarely or never used eBay, two-thirds (66.7%) rated their experience a 3 out of 5, and just over half rated their likelihood of recommending it to a friend at only 3 out of 5. The site wasn't unusable. It just wasn't giving people a reason to come back.
+
+### Card sorting: five studies across five sections
+
+The usability test pointed to friction; the card sorts pinpointed where the labeling was causing it. We ran five separate studies targeting different sections of the site.
+
+**Home page card sort (hybrid, 10 participants, 20 cards)**
+
+This was the study I ran. Specific labels like "Art," "Computer & Tablet," and "Hockey" hit 100% agreement. Generic and brand labels broke down fast: "Tools" was sorted into five different categories, and "Nike" and "adidas" split three ways across Sneakers, Fashion, and Sporting Goods. The detail that reframed the project: even experienced eBay users sorted the ambiguous labels inconsistently. This wasn't a new-user problem. The IA was producing friction for people who knew the site.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/card-sort-results.png"
+    alt="Card sort standardization grid showing agreement rates across participants"
+    caption="Home page card sort results: the standardization grid shows clear labels like 'Art' and 'Hockey' reaching near-total agreement, while 'Tools' and the sneaker brands scatter across multiple categories."
+/>
+
+**All categories card sort (open sort)**
+
+An open sort on the categories page revealed that users consistently grouped items into three buckets: sports, music, and electronics, but the existing categories didn't map cleanly to those mental models. Electronics was overloaded. Sports memorabilia and vintage movies were buried in categories that didn't signal their presence.
+
+**Electronics card sort (open sort, 5 participants)**
+
+Participants created their own groupings for the Electronics page subcategories. The consistent themes: phones, computers, smartwatches, and networking. Smart Watches were almost always separated from Cell Phones & Accessories, which was confirmation that they deserved their own top-level category.
+
+**Headphones & Portable Audio card sort (closed sort, 4 participants)**
+
+A closed sort with 13 categories and 26 real eBay listings. None of the four participants categorized listings the same way eBay did. The most telling finding: every participant placed an iPod accessory (an iFlash SD adapter) in "Portable Audio Accessories", but eBay had it in "Replacement Parts & Tools," a vague catch-all that wasn't serving anyone.
+
+**Deals page card sort (open sort)**
+
+Users found the Deals section disorganized. Technology deals were scattered across the page instead of consolidated. Users created their own "technology" and "collectibles" groupings, which didn't exist as explicit categories. Several experienced eBay users still couldn't classify items confidently, confirming the section needed explicit subcategory structure.
+
+### Tree testing the revised IA
+
+After applying card sort findings to the IA, we ran a tree test to validate the changes before prototyping. Nine participants, eight completed all five tasks.
+
+**Overall: 95% success rate, 75% direct success (no backtracking).**
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/tree-test-overview.png"
+    alt="Tree test results summary showing success and direct success rates per task"
+    caption="Tree test results: 95% average success rate across all tasks, 75% direct success rate. Tasks 1 and 4 achieved 100% direct success."
+/>
+
+The rename from "Sneakers" to "Sneakers & Brands" was immediately validated: all eight participants found Yeezy sneakers without a single wrong click.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/tree-test-task1-sneakers.png"
+    alt="Tree test Task 1 results showing 100% direct success for Sneakers & Brands"
+    caption="Task 1: 100% direct success after renaming 'Sneakers' to 'Sneakers & Brands'. The label change alone eliminated backtracking for every participant."
+/>
+
+The one failure point: Task 5 (browse tech deals) had a 25% failure rate. Users went to Electronics instead of eBay Deals; both are defensible paths. The fix wasn't to restructure; it was to add a Tech Deals link inside the Electronics dropdown, giving users a bridge between the two.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/tree-test-task5-deals.png"
+    alt="Tree test Task 5 results showing 25% failure rate for tech deals discovery"
+    caption="Task 5: 25% failure rate. Users navigating to Electronics instead of eBay Deals was a logical error, solved by adding a Tech Deals shortcut inside the Electronics dropdown."
+/>
+
+<SectionLabel>Process</SectionLabel>
+
+## Design exploration.
+
+With five card sorts and a tree test behind us, every IA change had a specific finding behind it. No guessing, no gut calls.
+
+### IA restructuring
+
+**Home page:**
+
+- Removed the "Sneakers" subcategory from Fashion, pure duplicate of the top-level Sneakers link
+- Renamed "Sneakers" top-level to "Sneakers & Brands" to cover Nike and adidas without ambiguity
+- Renamed "Tools" under Home & Garden to "Home & Garden Tools" to eliminate category confusion
+
+**All Categories page:**
+
+- Moved vintage movies and sports memorabilia into Collectables
+- Renamed "Sports Mem, Cards & Fan Shop" to "Cards & Memorabilia"
+
+**Electronics page:**
+
+- Made all subcategory names consistent with each other
+- Removed "Mixed Lots" (no clear home for its contents)
+- Added "Smartwatches" as a dedicated category, separated from Cell Phones & Accessories
+- Removed "Refurbished" as a top-level category, kept it as a filter at the item level instead
+- Moved "Shop by Interest" descriptions off the page and behind a "Learn More" button
+
+**Headphones & Portable Audio:**
+
+- Combined "Headphones Accessories" and "Headphones Parts" into one "Headphones Parts & Accessories" category
+- Removed "Replacement Parts & Tools", too vague, causing misclassification
+- Renamed "Portable Audio Accessories" to "Portable Audio Accessories & Parts"
+
+**Deals page:**
+
+- Removed the "Featured" subcategory (cluttering the page with promoted content)
+- Added a Collectibles section for rare items
+- Added explicit subcategories for technology deals instead of scattering them by discount size
+- Split "Home & Garden" into two sections
+
+**Post-tree-test addition:**
+
+- Added "Tech Deals" to the Electronics dropdown to bridge the navigation gap Task 5 exposed
+- Reworked and added account, notifications, and saved/wishlist icon groups in the header
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/ia-schematic-original.png"
+    alt="Original eBay IA schematic"
+    caption="Original IA: Yellow = top-level pages, Blue = subcategories, Orange = content. The Sneakers duplicate, vague Tools label, and overloaded Electronics structure are all visible here."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/ia-schematic-after-cardsort.png"
+    alt="IA schematic after card sort changes"
+    caption="After card sort: Sneakers & Brands renamed, duplicates removed, Electronics restructured with Smartwatches added and Refurbished removed."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/ia-schematic-final.png"
+    alt="Final IA schematic after tree test changes"
+    caption="Final IA: Tech Deals added to the Electronics dropdown, account and saved links consolidated into icon groups, 'Learn More' replacing inline subcategory descriptions."
+/>
+
+### Sketches — translating IA changes into screen decisions
+
+Before building in Figma, we sketched out the changes for each page to work through interaction decisions without getting distracted by visual polish. Five pages, five sketches.
+
+I led the home page Figma design, sketched its wireframes, and created the IA diagrams that visualized the proposed navigation changes.
+
+The home page sketch was the most consequential. The core move: collapse the three-bar header (utility nav + search bar + global nav) into a single bar. The utility links such as the account, watchlist, cart, and the notifications became four icons on the right of the search bar. "Shop by Category" moved into the global nav as "All Categories." Search leads, everything else follows.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/sketch-homepage.png"
+    alt="Low-fidelity home page sketch showing collapsed navigation and icon group"
+    caption="Home page sketch: utility nav removed, account/watchlist/cart/notification links replaced by icons on the right of the search bar, 'All Categories' moved into global nav."
+/>
+
+The All Categories sketch solved the information overload problem with one structural change: replace the flat list of every subcategory with collapsible dropdowns. Users see only top-level categories on arrival, drill down on click.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/sketch-all-categories.jpg"
+    alt="Low-fidelity All Categories page sketch showing collapsible dropdown pattern"
+    caption="All Categories sketch: flat list replaced by collapsible dropdowns. Same information, dramatically less cognitive load on arrival."
+/>
+
+The Headphones & Portable Audio sketch introduced the condition banner idea, which was a visible label on each listing image (New / Used / Refurbished) so buyers don't have to click through just to find out what they're buying.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/sketch-headphones.jpg"
+    alt="Low-fidelity Headphones listing page sketch showing condition labels on listing images"
+    caption="Headphones sketch: condition labels added directly to listing images. Lets buyers assess condition at a glance — one of the most actionable changes from the usability test findings."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/sketch-electronics.jpg"
+    alt="Low-fidelity Electronics page sketch showing Smartwatches category and Learn More button"
+    caption="Electronics sketch: Refurbished removed, Smartwatches added, 'Shop by Interest' descriptions replaced by a Learn More button."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/sketch-deals.jpg"
+    alt="Low-fidelity Deals page sketch showing category-organized layout"
+    caption="Deals sketch: deals organized by category at the top, three promo boxes below, Featured subcategory removed."
+/>
+
+### UI redesign, prototype
+
+With the sketches as the blueprint, the medium-fidelity Figma prototype applied the same decisions at higher resolution. I built the home page screens and oversaw design consistency across the whole set; my teammates owned the remaining page redesigns. The guiding principles were contrast, proximity, and hierarchy.
+
+**Home page: proximity and hierarchy**
+
+The original header stacked three bars (utility nav, search bar, global nav) into one dense strip that led with sign-in and register before the search field. The utility bar was removed entirely. Its account, watchlist, cart, and notification links were consolidated into icon groups on the right of the search bar. "Shop by Category" moved into the global nav as "All Categories." The result: search leads, browsing follows, account management is present but not competing for attention.
+
+Hyperlinks throughout the page were changed to blue to distinguish them from body text. Condition banners were added to listing card images so buyers can assess condition before clicking through.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/homepage-before.png"
+    alt="Original eBay homepage"
+    caption="Original homepage: utility bar above search, grey text, no condition indicators on listing cards, sign-in links leading the visual hierarchy."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/homepage-after.png"
+    alt="Redesigned eBay homepage"
+    caption="Redesigned homepage: utility bar gone, icon group on the right of search, condition banners on listings, black text, blue hyperlinks."
+/>
+
+**All Categories page: reducing information overload**
+
+Replaced the full flat list of every subcategory with a dropdown structure: main categories visible by default, subcategories expanding on click. Same information, dramatically less cognitive load on arrival.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/all-categories-before.png"
+    alt="Original All Categories page"
+    caption="Original: every subcategory visible at once, no hierarchy, easy to miss what you're looking for."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/all-categories-after.png"
+    alt="Redesigned All Categories page"
+    caption="Redesign: collapsible dropdowns. Users see top-level categories first, drill down on click."
+/>
+
+**Electronics page: cleaning up the category structure**
+
+Replaced inline subcategory descriptions with a "Learn More" button leading to a dedicated info page. Added Smartwatches as a top-level category. Removed Refurbished (kept as a filter, not a category). All subcategory names made consistent.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/electronics-before.png"
+    alt="Original Electronics category page"
+    caption="Original Electronics page: inconsistent category names, Refurbished as a top-level category, information about subcategories inlined beneath the browse grid."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/electronics-after.png"
+    alt="Redesigned Electronics category page"
+    caption="Redesigned Electronics page: Smartwatches added, Refurbished removed, descriptions replaced by a 'Learn More' button, category names consistent."
+/>
+
+**Headphones & Portable Audio page: contrast and condition clarity**
+
+The main issues were readability and condition visibility. Changes: made all black text darker for contrast; changed discount text from grey to red (important to buyers, should be eye-catching); changed "sold/watching" text from red to grey (less important than discount); slightly darkened shipping cost grey; added condition banners (New / Used / Refurbished) as colour-coded labels on listing images so buyers can assess at a glance.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/headphones-before.png"
+    alt="Original Headphones & Portable Audio listings page"
+    caption="Original: grey discount text, no condition labels, low-contrast pricing information across the board."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/headphones-after.png"
+    alt="Redesigned Headphones & Portable Audio listings page"
+    caption="Redesign: red discount text, condition banners on images, darker text throughout, shipping cost legible."
+/>
+
+**eBay Deals page: structure over promotion**
+
+Removed the "Featured" subcategory that pushed promotional content above the actual deals. Organized deals by category in a grid with clear labels. Added a Collectibles section. Added technology as an explicit subcategory so all tech deals appear together.
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/deals-before.png"
+    alt="Original eBay Deals page"
+    caption="Original Deals page: Featured promoted items leading, technology deals scattered, no Collectibles section."
+/>
+
+<Figure
+    src="/ebay-browsing-experience-redesign-img/deals-after.png"
+    alt="Redesigned eBay Deals page"
+    caption="Redesigned Deals page: deals organized by category, Collectibles section added, technology consolidated, Featured removed."
+/>
+
+### Decisions and tradeoffs
+
+**Buyers over sellers, by necessity.** Usability test participants were buyers and first-timers. Seller flows, listing creation, shipping instructions, account management, weren't addressed. That's a real gap. The user who pointed this out during peer review was right. A second research sprint focused on active sellers would be needed before making structural changes that affect their workflows.
+
+**Labels over structure.** The card sorts confirmed eBay's hierarchy (home → category → subcategory) was sound. The friction was entirely in label ambiguity and duplication. That shaped everything: targeted renames and removals, not a full reorganization.
+
+**Architecture doesn't fully solve discoverability.** Task 5 in the tree test proved this. Even with a restructured IA, users went to Electronics for tech deals because that's the logical first move. The fix was additive, a Tech Deals link in the Electronics dropdown, not architectural.
+
+**Scope-matched fidelity.** Five weeks, small participant pools. The prototype is medium-fidelity with documented before-and-after comparisons, not a complete high-fidelity redesign. The goal was defensible, evidence-backed changes. Every IA decision traces back to a specific card sort finding.
+
+<SectionLabel>Reflection</SectionLabel>
+
+## What I learned.
+
+Running five separate card sorts instead of one general one was the most important methodological decision the team made. Each page had its own user mental model problem. The Headphones card sort surfaced a misclassification that was entirely invisible from the home page study, the "iFlash adapter" sitting in a vague "Replacement Parts & Tools" category that every single participant rejected in favor of "Portable Audio Accessories." That finding wouldn't have come from a high-level IA audit alone.
+
+The usability tests were valuable for surfacing the emotional experience, what it feels like to miss the Sell label, to get misled by auction pricing, to navigate into the wrong subcategory and have to backtrack. But they didn't produce the specific, actionable IA fixes that the card sorts did. Both methods were necessary. Neither was sufficient alone.
+
+The tree test was the best signal of what actually mattered. A 100% direct success rate on the Sneakers task told me the rename worked better than any design critique would. A 25% failure rate on the Deals task told me the fix the team had made, restructuring the Deals section, wasn't enough. The users' mental model of where to find tech deals was grounded in "Electronics," not "eBay Deals." Adding the Tech Deals shortcut in the Electronics dropdown was the right call, but I only knew to make it because the test data said so.
+
+What I'd do differently: run at least one usability test on the prototype itself. The before-and-after comparisons show that changes were made, they don't show whether those changes made the task faster, clearer, or less confusing for a real user. That gap is the thing I'd close in a second iteration.
