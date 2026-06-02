@@ -7,9 +7,11 @@ import {
     getAdjacentWork,
     toEmbedUrl,
 } from "@/lib/content";
+import { extractSections } from "@/lib/toc";
 import { mdxComponents } from "@/components/MDXComponents";
 import { Footer } from "@/components/Footer";
 import { Lightbox } from "@/components/Lightbox";
+import { TableOfContents } from "@/components/TableOfContents";
 import type { Metadata } from "next";
 
 type PageProps = {
@@ -44,8 +46,14 @@ export default async function CaseStudyPage({ params }: PageProps) {
     const { frontmatter, content } = work;
     const idx = getAllWorkSlugs().sort().indexOf(slug);
 
+    const sections = extractSections(content);
+    if (frontmatter.outcomes && frontmatter.outcomes.length > 0) {
+        sections.push({ id: "outcomes", label: "Outcomes" });
+    }
+
     return (
         <main id="main-content" tabIndex={-1}>
+            <TableOfContents sections={sections} />
             {/* Hero */}
             <section className="case-hero">
                 <div className="container">
@@ -138,7 +146,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
                     {frontmatter.outcomes &&
                         frontmatter.outcomes.length > 0 && (
                             <>
-                                <span className="section-label">Outcomes</span>
+                                <span className="section-label" id="outcomes">Outcomes</span>
                                 <div className="outcomes-grid">
                                     {frontmatter.outcomes.map((o, i) => (
                                         <div key={i} className="outcome-card">

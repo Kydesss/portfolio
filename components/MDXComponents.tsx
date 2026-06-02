@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types';
 import Image, { ImageProps } from 'next/image';
+import { slugify } from '@/lib/toc';
 
 // ───── Custom components usable inside MDX files ─────
 
@@ -35,7 +36,12 @@ export function Figure({
 }
 
 export function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <span className="section-label">{children}</span>;
+  const id = typeof children === 'string' ? slugify(children) : undefined;
+  return (
+    <span className="section-label" id={id}>
+      {children}
+    </span>
+  );
 }
 
 // Merge defaults so MDX-authored `<Outcomes />`, `<Figure />`, etc. all resolve.
