@@ -729,6 +729,68 @@ footer {
   margin-top: 4rem;
   margin-bottom: 0.5rem;
   display: block;
+  scroll-margin-top: 6rem;
+}
+
+/* ───── Table of contents (case studies) ───── */
+.toc {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  width: 200px;
+  font-size: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.toc[data-visible='true'] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.toc-heading {
+  margin: 0 0 0.85rem 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--fg-muted);
+}
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  border-left: 1px solid var(--line);
+}
+
+.toc-link {
+  display: block;
+  padding: 0 0 0 1rem;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  color: var(--fg-muted);
+  text-decoration: none;
+  line-height: 1.35;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.toc-link:hover { color: var(--fg); }
+
+.toc-link[aria-current='true'] {
+  color: var(--fg);
+  border-left-color: var(--fg);
+}
+
+@media (max-width: 1100px) {
+  .toc { display: none; }
 }
 
 /* Next case */
