@@ -39,7 +39,9 @@ export function Lightbox() {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target) return;
-      const img = target.closest(".case-body img") as HTMLImageElement | null;
+      const img = target.closest(
+        ".case-body img, .gallery-card-media--has-img img"
+      ) as HTMLImageElement | null;
       if (!img) return;
       e.preventDefault();
       reset();
