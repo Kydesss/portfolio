@@ -39,9 +39,12 @@ export function Lightbox() {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target) return;
-      const img = target.closest(
-        ".case-body img, .gallery-card-media--has-img img"
-      ) as HTMLImageElement | null;
+      // Gallery media is a <button> wrapping the image plus an "Enlarge" chip, so
+      // the click can land on something other than the <img> itself.
+      const media = target.closest(".gallery-card-media--has-img");
+      const img = (media
+        ? media.querySelector("img")
+        : target.closest(".case-body img")) as HTMLImageElement | null;
       if (!img) return;
       e.preventDefault();
       reset();
