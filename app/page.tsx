@@ -1,8 +1,26 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { siteConfig } from '@/lib/site-config';
 import { getAllWork } from '@/lib/content';
 import { Footer } from '@/components/Footer';
 import { ToolsMarquee } from '@/components/ToolsMarquee';
+import { JsonLd } from '@/components/JsonLd';
+import { absoluteUrl, ogBase, personId, siteDescription, siteTitle } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  // `absolute` so the home page isn't titled "Joaquin Pacia — Joaquin Pacia"
+  // by the layout's title template.
+  title: { absolute: siteTitle },
+  description: siteDescription,
+  alternates: { canonical: '/' },
+  openGraph: {
+    ...ogBase,
+    type: 'website',
+    url: absoluteUrl('/'),
+    title: siteTitle,
+    description: siteDescription,
+  },
+};
 
 // Render headline with *italic* segments
 function renderHeadline(text: string) {
@@ -24,6 +42,28 @@ export default function HomePage() {
 
   return (
     <main id="main-content" tabIndex={-1}>
+      {/* Marks this as the canonical page about Joaquin (the Person node lives in
+          the root layout's graph) and lists the case studies it links out to. */}
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'ProfilePage',
+          url: absoluteUrl('/'),
+          name: siteTitle,
+          description: siteDescription,
+          mainEntity: { '@id': personId },
+          about: { '@id': personId },
+          inLanguage: 'en-CA',
+          hasPart: work.map((w) => ({
+            '@type': 'CreativeWork',
+            name: w.frontmatter.title,
+            abstract: w.frontmatter.summary,
+            url: absoluteUrl(`/work/${w.slug}`),
+            author: { '@id': personId },
+          })),
+        }}
+      />
+
       {/* Hero */}
       <section className="hero">
         <div className="container hero-grid">

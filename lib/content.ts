@@ -72,6 +72,17 @@ export function getWorkBySlug(slug: string): WorkItem | null {
   };
 }
 
+/**
+ * Last-modified time of a case study's source file, for sitemap `lastmod` and
+ * schema.org `dateModified`. Uses the real file mtime rather than a hand-kept
+ * frontmatter date, so it can't go stale. Returns null if the file is missing.
+ */
+export function getWorkLastModified(slug: string): Date | null {
+  const filePath = path.join(WORK_DIR, `${slug}.mdx`);
+  if (!fs.existsSync(filePath)) return null;
+  return fs.statSync(filePath).mtime;
+}
+
 export function getAllWork(): WorkItem[] {
   return getAllWorkSlugs()
     .map((slug) => getWorkBySlug(slug))
