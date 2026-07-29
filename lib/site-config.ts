@@ -19,6 +19,11 @@ export const siteConfig = {
     // CV
     experience: [
         {
+            year: "May 2025 - Present",
+            role: "Independent UI/UX Designer & Front-End Developer",
+            org: "Self-Employed · Mississauga, ON",
+        },
+        {
             year: "Nov 2024 - Jan 2025",
             role: "Website & UI/UX Designer",
             org: "EVDrop Technology Inc. · Toronto, ON",
