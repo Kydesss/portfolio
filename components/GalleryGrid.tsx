@@ -1,13 +1,18 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { GALLERY_CATEGORIES, type GalleryItem } from '@/lib/gallery';
+import { CategoryGlyph, LinkIcon, ZoomIcon, linkKind } from '@/components/GalleryIcons';
 
 type Filter = 'All' | (typeof GALLERY_CATEGORIES)[number];
 
-function GalleryCard({ item }: { item: GalleryItem }) {
+function GalleryCard({ item, targeted }: { item: GalleryItem; targeted: boolean }) {
   return (
-    <div className="gallery-card">
+    <div
+      // Anchor target so /gallery#<slug> deep-links to this card.
+      id={item.slug}
+      className={`gallery-card${targeted ? ' is-targeted' : ''}`}
+    >
       {item.image ? (
         // The whole image is shown (object-fit: contain) over a blurred fill of
         // itself, so portrait posters, square posts, and landscape thumbnails all
@@ -15,7 +20,7 @@ function GalleryCard({ item }: { item: GalleryItem }) {
         <button
           type="button"
           className="gallery-card-media gallery-card-media--has-img"
-          aria-label={`View full image: ${item.title}`}
+          aria-label={`Enlarge image: ${item.title}`}
         >
           <span
             className="gallery-card-media-blur"
@@ -24,16 +29,36 @@ function GalleryCard({ item }: { item: GalleryItem }) {
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={item.image} alt={item.title} loading="lazy" />
+          {/* Always visible, not hover-only: without it the image reads as a video
+              thumbnail and people don't know it enlarges. */}
+          <span className="gallery-card-zoom" aria-hidden="true">
+            <ZoomIcon />
+            Enlarge
+          </span>
         </button>
       ) : (
-        <div className="gallery-card-media">
-          <span className="gallery-card-placeholder">{item.category}</span>
+        // No image on file, so draw deliberate cover art instead of an empty
+        // photo slot. Shorter than the image media, so it reads as a banner.
+        <div className="gallery-card-media gallery-card-media--empty" aria-hidden="true">
+          <span className="gallery-card-cover">
+            <CategoryGlyph category={item.category} />
+            <span className="gallery-card-cover-label">{item.category}</span>
+          </span>
         </div>
       )}
 
       <div className="gallery-card-body">
         <div className="gallery-card-head">
-          <h3>{item.title}</h3>
+          <h3>
+            {item.title}
+            <a
+              className="gallery-card-anchor"
+              href={`#${item.slug}`}
+              aria-label={`Link to ${item.title}`}
+            >
+              #
+            </a>
+          </h3>
           <span className="gallery-card-year">{item.year}</span>
         </div>
         <p className="gallery-card-desc">{item.description}</p>
@@ -51,6 +76,7 @@ function GalleryCard({ item }: { item: GalleryItem }) {
             target="_blank"
             rel="noopener noreferrer"
           >
+            <LinkIcon kind={linkKind(item.href)} className="gallery-card-link-icon" />
             {item.linkLabel ?? 'View'} <span className="arrow">→</span>
           </a>
         )}
@@ -61,6 +87,7 @@ function GalleryCard({ item }: { item: GalleryItem }) {
 
 export function GalleryGrid({ items }: { items: GalleryItem[] }) {
   const [filter, setFilter] = useState<Filter>('All');
+  const [targeted, setTargeted] = useState<string | null>(null);
 
   // Only show filter tabs for categories that actually have items.
   const activeCategories = useMemo(
@@ -74,6 +101,31 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
   );
 
   const filters: Filter[] = ['All', ...activeCategories];
+
+  // Deep links: /gallery#<slug>. Handled here rather than left to the browser
+  // because an active category filter can keep the target card out of the DOM.
+  useEffect(() => {
+    const resolve = () => {
+      const slug = decodeURIComponent(window.location.hash.slice(1));
+      if (!slug || !items.some((i) => i.slug === slug)) return;
+      setFilter('All');
+      setTargeted(slug);
+    };
+    resolve();
+    window.addEventListener('hashchange', resolve);
+    return () => window.removeEventListener('hashchange', resolve);
+  }, [items]);
+
+  // Runs after the filter reset above has put the card back in the DOM.
+  useEffect(() => {
+    if (!targeted) return;
+    const el = document.getElementById(targeted);
+    if (!el) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    const clear = setTimeout(() => setTargeted(null), 2000);
+    return () => clearTimeout(clear);
+  }, [targeted]);
 
   return (
     <>
@@ -93,7 +145,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
 
       <div className="gallery-grid">
         {filtered.map((item) => (
-          <GalleryCard key={item.slug} item={item} />
+          <GalleryCard key={item.slug} item={item} targeted={targeted === item.slug} />
         ))}
       </div>
     </>
