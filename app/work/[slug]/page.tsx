@@ -5,6 +5,7 @@ import {
     getAllWorkSlugs,
     getWorkBySlug,
     getAdjacentWork,
+    getWorkLastModified,
     toEmbedUrl,
 } from "@/lib/content";
 import { extractSections } from "@/lib/toc";
@@ -12,6 +13,14 @@ import { mdxComponents } from "@/components/MDXComponents";
 import { Footer } from "@/components/Footer";
 import { Lightbox } from "@/components/Lightbox";
 import { TableOfContents } from "@/components/TableOfContents";
+import { JsonLd } from "@/components/JsonLd";
+import {
+    absoluteUrl,
+    breadcrumbSchema,
+    ogBase,
+    personId,
+    websiteId,
+} from "@/lib/seo";
 import type { Metadata } from "next";
 
 type PageProps = {
@@ -30,9 +39,37 @@ export async function generateMetadata({
     const { slug } = await params;
     const work = getWorkBySlug(slug);
     if (!work) return {};
+
+    const { frontmatter } = work;
+    const path = `/work/${slug}`;
+    // The layout template appends the brand, so the tail here stays short.
+    const title = `${frontmatter.title} — UX Case Study`;
+    const modified = getWorkLastModified(slug);
+
     return {
-        title: `${work.frontmatter.title} — Case Study`,
-        description: work.frontmatter.summary,
+        title,
+        description: frontmatter.summary,
+        // Frontmatter `tag` reads like "Web · UX Design · Streaming Services";
+        // split it into real keyword terms.
+        keywords: frontmatter.tag
+            .split("·")
+            .map((t) => t.trim())
+            .filter(Boolean),
+        alternates: { canonical: path },
+        openGraph: {
+            ...ogBase,
+            type: "article",
+            url: absoluteUrl(path),
+            title,
+            description: frontmatter.summary,
+            modifiedTime: modified?.toISOString(),
+            authors: [absoluteUrl("/")],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description: frontmatter.summary,
+        },
     };
 }
 
@@ -51,8 +88,50 @@ export default async function CaseStudyPage({ params }: PageProps) {
         sections.push({ id: "outcomes", label: "Outcomes" });
     }
 
+    const path = `/work/${slug}`;
+    const modified = getWorkLastModified(slug);
+
     return (
         <main id="main-content" tabIndex={-1}>
+            {/* CreativeWork rather than Article: a case study has no publication
+                date to claim, and Article's rich results expect one. dateModified
+                comes from the source file's real mtime. */}
+            <JsonLd
+                data={{
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "CreativeWork",
+                            "@id": `${absoluteUrl(path)}#case-study`,
+                            url: absoluteUrl(path),
+                            name: frontmatter.title,
+                            headline: frontmatter.title,
+                            abstract: frontmatter.summary,
+                            description: frontmatter.summary,
+                            keywords: frontmatter.tag
+                                .split("·")
+                                .map((t) => t.trim())
+                                .filter(Boolean),
+                            inLanguage: "en-CA",
+                            author: { "@id": personId },
+                            creator: { "@id": personId },
+                            copyrightYear: frontmatter.year,
+                            ...(modified && {
+                                dateModified: modified.toISOString(),
+                            }),
+                            ...(frontmatter.cover && {
+                                image: absoluteUrl(frontmatter.cover),
+                            }),
+                            isPartOf: { "@id": websiteId },
+                        },
+                        breadcrumbSchema([
+                            { name: "Home", path: "/" },
+                            { name: "Work", path: "/#work" },
+                            { name: frontmatter.title, path },
+                        ]),
+                    ],
+                }}
+            />
             <TableOfContents sections={sections} />
             {/* Hero */}
             <section className="case-hero">
