@@ -3,7 +3,7 @@
 
 export const siteConfig = {
     name: "Joaquin Pacia",
-    role: "UI / UX Designer · Multimedia Producer",
+    role: "UI / UX Designer",
     location: "Mississauga, ON",
     status: "Open to junior UI/UX roles",
     currently:
