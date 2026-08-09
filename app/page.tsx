@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { siteConfig } from '@/lib/site-config';
-import { getAllWork } from '@/lib/content';
+import { getAllWork, getWorkThumbnail } from '@/lib/content';
 import { Footer } from '@/components/Footer';
 import { ToolsStrip } from '@/components/ToolsStrip';
 import { JsonLd } from '@/components/JsonLd';
@@ -106,12 +106,23 @@ export default function HomePage() {
                 {/* A design portfolio whose work list has no pictures of the
                     work gives a scanning reader nothing to catch. */}
                 <span className="work-thumb" aria-hidden="true">
-                  {w.frontmatter.cover ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={w.frontmatter.cover} alt="" loading="lazy" decoding="async" />
-                  ) : (
-                    <span className="work-thumb-fallback">{w.frontmatter.year}</span>
-                  )}
+                  {(() => {
+                    const thumb = getWorkThumbnail(w.frontmatter);
+                    if (!thumb) {
+                      return <span className="work-thumb-fallback">{w.frontmatter.year}</span>;
+                    }
+                    return (
+                      <>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={thumb} alt="" loading="lazy" decoding="async" />
+                        {/* Marks the rows whose cover is a video, so the poster
+                            frame doesn't read as a plain screenshot. */}
+                        {w.frontmatter.coverVideo && (
+                          <span className="work-thumb-play">▶</span>
+                        )}
+                      </>
+                    );
+                  })()}
                 </span>
                 <span className="work-body">
                   <span className="title">{w.frontmatter.title}</span>

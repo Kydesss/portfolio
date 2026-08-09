@@ -51,6 +51,51 @@ export function toEmbedUrl(url: string): string | null {
   return null;
 }
 
+/** YouTube/Vimeo video id from a watch URL, or null if unrecognized. */
+function videoId(url: string): { host: 'youtube' | 'vimeo'; id: string } | null {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, '');
+    if (host === 'youtube.com' || host === 'm.youtube.com') {
+      const v = u.searchParams.get('v');
+      if (v) return { host: 'youtube', id: v };
+      const m = u.pathname.match(/\/(shorts|embed)\/([\w-]+)/);
+      if (m) return { host: 'youtube', id: m[2] };
+    }
+    if (host === 'youtu.be') {
+      const id = u.pathname.slice(1);
+      if (id) return { host: 'youtube', id };
+    }
+    if (host === 'vimeo.com') {
+      const id = u.pathname.split('/').filter(Boolean)[0];
+      if (id) return { host: 'vimeo', id };
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+/**
+ * Still image for a work item: its cover if it has one, otherwise the poster
+ * frame of its cover video. Without this a video-cover case study shows no
+ * thumbnail at all in the work list.
+ *
+ * hqdefault rather than maxresdefault — the latter 404s for plenty of videos.
+ * Vimeo has no equivalent URL pattern (it needs an API call), so those fall
+ * through to null and the caller renders its own placeholder.
+ */
+export function getWorkThumbnail(fm: WorkFrontmatter): string | null {
+  if (fm.cover) return fm.cover;
+  if (!fm.coverVideo) return null;
+  const video = videoId(fm.coverVideo);
+  if (video?.host === 'youtube') {
+    return `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
+  }
+  return null;
+}
+
 export type WorkItem = {
   slug: string;
   frontmatter: WorkFrontmatter;
