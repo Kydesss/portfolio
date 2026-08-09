@@ -115,9 +115,9 @@ export default function HomePage() {
                       <>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={thumb} alt="" loading="lazy" decoding="async" />
-                        {/* Marks the rows whose cover is a video, so the poster
-                            frame doesn't read as a plain screenshot. */}
-                        {w.frontmatter.coverVideo && (
+                        {/* Only when the thumbnail *is* a video poster frame —
+                            a real cover image shouldn't claim to be playable. */}
+                        {!w.frontmatter.cover && w.frontmatter.coverVideo && (
                           <span className="work-thumb-play">▶</span>
                         )}
                       </>
