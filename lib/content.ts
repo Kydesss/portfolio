@@ -16,6 +16,11 @@ export type WorkFrontmatter = {
   cover?: string;
   coverVideo?: string;
   outcomes?: { stat: string; desc: string }[];
+  // Surfaced in the case-study hero. Answers "can this person build?" in the
+  // first screen instead of leaving it buried in the body copy.
+  tools?: string[];
+  // Optional external links (live prototype, repo, Figma file).
+  prototype?: string;
 };
 
 // Normalize a YouTube/Vimeo URL into an embeddable src. Returns null if unrecognized.

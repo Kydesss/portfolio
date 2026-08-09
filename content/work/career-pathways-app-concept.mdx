@@ -9,19 +9,30 @@ tag: "Mobile · UX Design · Education"
 order: 2
 # cover: "'/project-two-img/Image of low fidelity prototype Figma file.png'"
 coverVideo: "https://www.youtube.com/watch?v=Yc4FSOvi63g"
+tools:
+    - "Figma"
+    - "Low-fidelity prototyping"
+    - "Design thinking"
 outcomes:
-    - stat: "83%"
-      desc: "Grade on the low-fidelity prototype, with positive feedback on the user flows, design decisions, and overall concept viability."
-    - stat: "100%"
-      desc: "Grade on the final project video pitch, with positive feedback on the problem framing, research depth, and design decisions."
+    - stat: "396:1"
+      desc: "Average Ontario student-to-counsellor ratio, and 826:1 in the most under-resourced schools. The supply constraint every scoping decision was measured against."
+    - stat: "84%"
+      desc: "Toronto and Vancouver high schoolers who report feeling ill-prepared for university (Chorostil & Ranger, 2021) — the demand side of the same gap."
     - stat: "6"
-      desc: "End-to-end use cases built as a low-fidelity Figma prototype, from career quiz to counsellor scheduling"
+      desc: "End-to-end flows prototyped and walked, from career quiz through counsellor booking with calendar confirmation."
 prototype: "https://www.figma.com/design/JQ7krng06UoFIEQaepbOzf/EDS345-Low-Fidelity-Prototype?m=auto&t=z92ikY49p1VEZXMl-1"
 ---
 
 <SectionLabel>The Challenge</SectionLabel>
 
-## High schoolers can't get career guidance fast enough, and counsellors can't keep up.
+## One counsellor for every 396 students. No app fixes that — so I designed around it.
+
+<TLDR
+  problem="Ontario school counsellors carry 396 students each, and 826 in the worst-resourced schools. Students like Emily get a 15-minute appointment and leave no closer to a decision."
+  approach="Stakeholder problem-mapping · two demographic studies · a six-person ideation session · competitive analysis · a six-flow mobile prototype"
+  result="Reframing the brief from a student information problem to a counsellor supply problem changed the product. Scheduling moved from a nice-to-have tab into the core experience, and the AI-advice direction got cut."
+  figma="https://www.figma.com/design/JQ7krng06UoFIEQaepbOzf/EDS345-Low-Fidelity-Prototype?m=auto&t=z92ikY49p1VEZXMl-1"
+/>
 
 Meet Emily: a Grade 12 student in Ontario, applying to universities, sitting between parents with a fixed career plan for her and her own genuine uncertainty about what she actually wants. Her school counsellor is supposed to help, but with one counsellor serving 396 students on average, and as many as 826 in the most under-resourced schools (Collie, 2019), Emily gets a 15-minute appointment if she's lucky. She leaves the office no closer to a decision.
 
@@ -35,7 +46,7 @@ The product had to thread three constraints up front. It needed to serve the stu
 
 <SectionLabel>Research</SectionLabel>
 
-## Key insights.
+## It was never an information problem.
 
 I started with stakeholder problem-mapping before touching a single screen. The persona work surfaced Emily's emotional reality: ambition, parental pressure, isolation, but the two demographic-level studies reframed the problem entirely. This wasn't a student _information_ problem. It was a counsellor _supply_ problem. Students weren't short on Google results; they were short on a trusted adult with time. That insight shaped every later decision, including the choice to build counsellor scheduling into the core experience instead of treating it as a "nice-to-have" tab.
 
@@ -58,7 +69,7 @@ To pressure-test the direction, I ran a six-person ideation session with three s
 
 <SectionLabel>Process</SectionLabel>
 
-## Design exploration.
+## Designing for two users at once.
 
 I did competitive analysis against CareerExplorer.com and LinkedIn Career Explorer first. CareerExplorer leaned heavily on assessment quizzes and static resource libraries, strong on diagnostics, thin on human follow-up. LinkedIn's tool matched users to jobs based on overlapping skills, useful for someone mid-career, useless for a 17-year-old who hasn't built any skills yet. The design opportunity was clear: combine self-directed exploration (quizzes, articles, browseable careers) with on-demand counsellor access, on a mobile surface, priced so a global pool of counsellors could plug in and earn alongside their day jobs.
 
@@ -89,6 +100,8 @@ From there I built a [low-fidelity Figma prototype](https://www.figma.com/design
 **Mobile-first over the obvious web-first call.** A career platform "feels" like a website. But Emily's actual computing device is her phone, and so is the device of the students with the worst counsellor access, in rural schools and lower-income districts. Designing mobile-first widened the addressable problem, at the cost of fitting less information per screen. That constraint forced sharper IA decisions on the explore and career-detail pages instead of letting them sprawl.
 
 **Killed the "AI advice chatbot" direction early.** Ideation kept surfacing variations of _"make the app answer her questions."_ I cut that direction for two reasons: it competes with ChatGPT on a losing dimension, and it cannibalises the counsellor supply side. The trust differentiator here is _human_, not synthetic. Anything that nudged the experience toward replacing counsellors got removed.
+
+**If this shipped, I would track it against:** the share of students who book a counsellor session within 14 days of finishing the quiz, counsellor supply and utilisation on the marketplace side, repeat sessions per student, and quiz-completion rate as an early proxy for whether the exploration surface is earning attention.
 
 <SectionLabel>Reflection</SectionLabel>
 

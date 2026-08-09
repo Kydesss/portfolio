@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import {
     getAllWorkSlugs,
     getWorkBySlug,
@@ -14,6 +15,7 @@ import { Footer } from "@/components/Footer";
 import { Lightbox } from "@/components/Lightbox";
 import { TableOfContents } from "@/components/TableOfContents";
 import { JsonLd } from "@/components/JsonLd";
+import { StatValue } from "@/components/StatValue";
 import {
     absoluteUrl,
     breadcrumbSchema,
@@ -162,6 +164,16 @@ export default async function CaseStudyPage({ params }: PageProps) {
                             <p>{frontmatter.year}</p>
                         </div>
                     </div>
+                    {frontmatter.tools && frontmatter.tools.length > 0 && (
+                        <div className="case-tools">
+                            <span>Tools &amp; methods</span>
+                            <ul>
+                                {frontmatter.tools.map((t) => (
+                                    <li key={t}>{t}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </section>
 
@@ -218,6 +230,16 @@ export default async function CaseStudyPage({ params }: PageProps) {
                         <MDXRemote
                             source={content}
                             components={mdxComponents}
+                            options={{
+                                mdxOptions: {
+                                    // GitHub-flavoured markdown, for pipe
+                                    // tables in case studies. Note this
+                                    // pipeline drops array/object literal
+                                    // props on MDX components — pass data as
+                                    // markdown or string props, not `{[...]}`.
+                                    remarkPlugins: [remarkGfm],
+                                },
+                            }}
                         />
                     </article>
 
@@ -229,7 +251,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
                                 <div className="outcomes-grid">
                                     {frontmatter.outcomes.map((o, i) => (
                                         <div key={i} className="outcome-card">
-                                            <div className="stat">{o.stat}</div>
+                                            <div className="stat">
+                                                <StatValue value={o.stat} />
+                                            </div>
                                             <div className="desc">{o.desc}</div>
                                         </div>
                                     ))}

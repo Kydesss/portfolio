@@ -5,13 +5,19 @@ export const siteConfig = {
     name: "Joaquin Pacia",
     role: "UI / UX Designer · Multimedia Producer",
     location: "Mississauga, ON",
-    status: "Open to junior UI/UX roles",
+    status: "Open to junior product design roles",
+    // Shown under "Latest" in the hero. Keep this a verifiable proof point, not
+    // a status update — it's the one line a recruiter reads before scrolling.
     currently:
-        "Recent graduate, building case studies and looking for opportunities",
+        "8 interviews, 12 usability testers, and Crunchyroll shipped the same fix",
 
     // Hero headline — keep it short. Use *asterisks* to italicize parts.
-    headline:
-        "Crafting imaginative digital experiences where *creativity meets technology.*",
+    headline: "I design the moments where products *lose people.*",
+
+    // One line under the headline. Names the moments so the claim above is
+    // concrete rather than abstract.
+    subhead:
+        "A paywall. A first visit. An ER intake form. An intruder at the door. Five case studies about the highest-pressure screens in a product, and what changes when you get them right.",
 
     // About section — supports paragraphs. Use \n\n between paragraphs.
     about: `Hi, I'm Joaquin — a UofT graduate (High Distinction) and UI/UX designer who believes fun is equal to success. \n\n I love turning messy problems into clean, intuitive interfaces, with a background that blends Figma-driven UI/UX work, multimedia production, and a healthy obsession for tech (the kind that has me self-hosting services and tinkering with Linux on the weekends). \n\n I bring both a creator's eye and a problem-solver's mindset to every project — whether that's a 53-test-case usability study or a Lottie animation handoff to engineering.`,
@@ -66,12 +72,12 @@ export const siteConfig = {
 
     tools: [
         // Design Tools
-        { name: "Figma", icon: "logos:figma" },
-        { name: "Illustrator", icon: "logos:adobe-illustrator" },
-        { name: "Photoshop", icon: "logos:adobe-photoshop" },
-        { name: "InDesign", icon: "logos:adobe-indesign" },
-        { name: "After Effects", icon: "logos:adobe-after-effects" },
-        { name: "Premiere Pro", icon: "logos:adobe-premiere" },
+        { name: "Figma", icon: "logos:figma", core: true },
+        { name: "Illustrator", icon: "logos:adobe-illustrator", core: true },
+        { name: "Photoshop", icon: "logos:adobe-photoshop", core: true },
+        { name: "InDesign", icon: "logos:adobe-indesign", core: true },
+        { name: "After Effects", icon: "logos:adobe-after-effects", core: true },
+        { name: "Premiere Pro", icon: "logos:adobe-premiere", core: true },
         // { name: "Descript", icon: "logos:descript-icon" },
 
         // Productivity
@@ -83,11 +89,11 @@ export const siteConfig = {
         { name: "HTML", icon: "skill-icons:html" },
         { name: "CSS", icon: "skill-icons:css" },
         { name: "JavaScript", icon: "logos:javascript" },
-        { name: "TypeScript", icon: "devicon:typescript" },
-        { name: "React", icon: "logos:react" },
-        { name: "Next.js", icon: "logos:nextjs-icon" },
+        { name: "TypeScript", icon: "devicon:typescript", core: true },
+        { name: "React", icon: "logos:react", core: true },
+        { name: "Next.js", icon: "logos:nextjs-icon", core: true },
         { name: "Vite", icon: "devicon:vitejs" },
-        { name: "Tailwind CSS", icon: "logos:tailwindcss-icon" },
+        { name: "Tailwind CSS", icon: "logos:tailwindcss-icon", core: true },
         { name: "Bootstrap", icon: "logos:bootstrap" },
         { name: "VS Code", icon: "logos:visual-studio-code" },
 
@@ -97,10 +103,10 @@ export const siteConfig = {
         { name: "Ubuntu Linux", icon: "logos:ubuntu" },
         { name: "Docker", icon: "logos:docker-icon" },
         { name: "Supabase", icon: "logos:supabase-icon" },
-        { name: "Vercel", icon: "skill-icons:vercel-light" },
+        { name: "Vercel", icon: "skill-icons:vercel-light", core: true },
 
         // Version Control & AI
-        { name: "Git", icon: "logos:git-icon" },
+        { name: "Git", icon: "logos:git-icon", core: true },
         { name: "GitHub", icon: "logos:github-icon" },
         { name: "Claude", icon: "logos:claude-icon" },
     ],

@@ -1,6 +1,14 @@
 import type { MDXComponents } from 'mdx/types';
-import Image, { ImageProps } from 'next/image';
 import { slugify } from '@/lib/toc';
+import { Compare } from '@/components/Compare';
+import { StatValue } from '@/components/StatValue';
+import {
+  Accordion,
+  ImpactModel,
+  ProblemCards,
+  Table,
+  TLDR,
+} from '@/components/CaseBlocks';
 
 // ───── Custom components usable inside MDX files ─────
 
@@ -9,7 +17,9 @@ export function Outcomes({ items }: { items: { stat: string; desc: string }[] })
     <div className="outcomes-grid">
       {items.map((item, i) => (
         <div key={i} className="outcome-card">
-          <div className="stat">{item.stat}</div>
+          <div className="stat">
+            <StatValue value={item.stat} />
+          </div>
           <div className="desc">{item.desc}</div>
         </div>
       ))}
@@ -29,7 +39,7 @@ export function Figure({
   return (
     <figure className="figure">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} />
+      <img src={src} alt={alt} loading="lazy" decoding="async" />
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
@@ -49,4 +59,10 @@ export const mdxComponents: MDXComponents = {
   Outcomes,
   Figure,
   SectionLabel,
+  TLDR,
+  Accordion,
+  ProblemCards,
+  ImpactModel,
+  Table,
+  Compare,
 };

@@ -8,18 +8,29 @@ year: "2023"
 tag: "Web · UX Research · E-commerce"
 order: 4
 cover: "/ebay-browsing-experience-redesign-img/cover.png"
+tools:
+    - "Figma"
+    - "Card sorting"
+    - "Tree testing"
+    - "Usability testing"
 outcomes:
     - stat: "95%"
-      desc: "Average tree test success rate across 5 tasks on the redesigned IA, with 75% of those completed without any backtracking."
-    - stat: "5"
-      desc: "Separate card sorts conducted across the home page, all categories, electronics, headphones, and deals sections."
-    - stat: "85%"
-      desc: "Final course grade (A), with positive feedback on research methodology, IA decisions, and prototype fidelity."
+      desc: "Average tree-test task success on the redesigned IA, with 75% completed without a single backtrack."
+    - stat: "100%"
+      desc: "Direct success on the Sneakers task after renaming the category — all eight participants found Yeezys without one wrong click."
+    - stat: "25%"
+      desc: "Failure rate on the Deals task, which told me eBay’s own restructure had not gone far enough and drove the Tech Deals shortcut into the Electronics dropdown."
 ---
 
 <SectionLabel>The Challenge</SectionLabel>
 
-## eBay works. But for a first-time visitor, it barely feels like it.
+## eBay lists the same category in two places. I tested which one people actually look in.
+
+<TLDR
+  problem="eBay works for experienced buyers and stonewalls new ones: duplicate categories, an overloaded browse page, and auction prices that read like sale prices."
+  approach="Usability testing · five card sorts across five sections · IA restructure · UI sketches · a medium-fidelity prototype · a tree test"
+  result="95% average task success on the redesigned IA, 75% with no backtracking. The Sneakers rename hit 100% direct success; a 25% failure on Deals proved the existing fix was not enough and drove a shortcut into the Electronics dropdown."
+/>
 
 eBay connects buyers and sellers across 190+ markets. For experienced users, that breadth is the point. For anyone new, it's a wall. The navigation bar lists the same category in two places. The page that lets you browse everything is so dense you scroll past what you were looking for. Listings show different information depending on where you find them. Text is grey where it should be black. Auction pricing looks like a sale price until you read the fine print.
 
@@ -35,7 +46,7 @@ The brief for this project was to evaluate eBay's human-computer interaction ele
 
 <SectionLabel>Research</SectionLabel>
 
-## Key insights.
+## What five card sorts exposed.
 
 Research ran in three stages: usability testing to surface the friction points, card sorts to diagnose the labeling problems, and a tree test to validate the proposed IA changes before prototyping.
 
@@ -114,7 +125,7 @@ The one failure point: Task 5 (browse tech deals) had a 25% failure rate. Users 
 
 <SectionLabel>Process</SectionLabel>
 
-## Design exploration.
+## Rebuilding the information architecture.
 
 With five card sorts and a tree test behind us, every IA change had a specific finding behind it. No guessing, no gut calls.
 
@@ -312,6 +323,8 @@ Removed the "Featured" subcategory that pushed promotional content above the act
 **Architecture doesn't fully solve discoverability.** Task 5 in the tree test proved this. Even with a restructured IA, users went to Electronics for tech deals because that's the logical first move. The fix was additive, a Tech Deals link in the Electronics dropdown, not architectural.
 
 **Scope-matched fidelity.** Five weeks, small participant pools. The prototype is medium-fidelity with documented before-and-after comparisons, not a complete high-fidelity redesign. The goal was defensible, evidence-backed changes. Every IA decision traces back to a specific card sort finding.
+
+**If this shipped, I would track it against:** category-to-listing click-through on the restructured nav, search abandonment among first-time visitors, the rate of users who reach a listing without backtracking, and the proportion of auction listings misread as fixed-price — the confusion the pricing treatment is meant to remove.
 
 <SectionLabel>Reflection</SectionLabel>
 

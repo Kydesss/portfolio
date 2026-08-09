@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { siteConfig } from '@/lib/site-config';
 import { getAllWork } from '@/lib/content';
 import { Footer } from '@/components/Footer';
-import { ToolsMarquee } from '@/components/ToolsMarquee';
+import { ToolsStrip } from '@/components/ToolsStrip';
 import { JsonLd } from '@/components/JsonLd';
 import { absoluteUrl, ogBase, personId, siteDescription, siteTitle } from '@/lib/seo';
 
@@ -70,10 +70,11 @@ export default function HomePage() {
           <div className="hero-text">
             <p className="eyebrow reveal">{siteConfig.role}</p>
             <h1 className="reveal">{renderHeadline(siteConfig.headline)}</h1>
+            <p className="hero-subhead reveal">{siteConfig.subhead}</p>
             <div className="hero-meta reveal">
               <div>Based in <span>{siteConfig.location}</span></div>
               <div>Available <span>{siteConfig.status}</span></div>
-              <div>Currently <span>{siteConfig.currently}</span></div>
+              <div>Latest <span>{siteConfig.currently}</span></div>
             </div>
           </div>
           <img
@@ -85,8 +86,6 @@ export default function HomePage() {
           />
         </div>
       </section>
-
-      <ToolsMarquee />
 
       {/* Work */}
       <section id="work">
@@ -104,7 +103,29 @@ export default function HomePage() {
             {work.map((w, i) => (
               <Link key={w.slug} href={`/work/${w.slug}`} className="work-item">
                 <span className="num">{String(i + 1).padStart(2, '0')}</span>
-                <span className="title">{w.frontmatter.title}</span>
+                {/* A design portfolio whose work list has no pictures of the
+                    work gives a scanning reader nothing to catch. */}
+                <span className="work-thumb" aria-hidden="true">
+                  {w.frontmatter.cover ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={w.frontmatter.cover} alt="" loading="lazy" decoding="async" />
+                  ) : (
+                    <span className="work-thumb-fallback">{w.frontmatter.year}</span>
+                  )}
+                </span>
+                <span className="work-body">
+                  <span className="title">{w.frontmatter.title}</span>
+                  <span className="work-summary">{w.frontmatter.summary}</span>
+                  {w.frontmatter.outcomes && w.frontmatter.outcomes.length > 0 && (
+                    <span className="work-stats">
+                      {w.frontmatter.outcomes.slice(0, 2).map((o, oi) => (
+                        <span key={oi} className="work-stat">
+                          <b>{o.stat}</b> {o.desc.split(/[.,]/)[0]}
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                </span>
                 <span className="tag">{w.frontmatter.tag}</span>
                 <span className="arrow">→</span>
               </Link>
@@ -168,6 +189,8 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
+
+          <ToolsStrip />
 
           {siteConfig.recognition.length > 0 && (
             <div className="cv-block">
