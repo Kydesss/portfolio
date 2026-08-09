@@ -8,18 +8,28 @@ year: "2024"
 tag: "Mobile · UX Design · Healthcare"
 order: 3
 cover: "/er-triage-support-app-img/cover.png"
+tools:
+    - "Figma"
+    - "Think-aloud testing"
+    - "SUS"
 outcomes:
     - stat: "85"
-      desc: "SUS score from peer usability testing, Grade B (above average), with consistent praise for visual design and information clarity."
+      desc: "SUS score from peer usability testing — Grade B, above average. A single participant, so it is a signal, not a finding."
     - stat: "11"
-      desc: "Prototype frames covering the full intake journey: welcome, patient history, allergy intake, physiological data, wait-time, and queue placement."
-    - stat: "100%"
-      desc: "Final project grade, with positive feedback on prototype interaction design and accessibility considerations."
+      desc: "Prototype frames covering the full intake journey: welcome, history, allergies, physiological capture, wait time, and queue placement."
+    - stat: "1"
+      desc: "Screen the test broke: the allergy intake front-loaded every option at once, in the one context where cognitive load is already maxed."
 ---
 
 <SectionLabel>The Challenge</SectionLabel>
 
 ## The waiting room is already a stressor. The intake process shouldn't add to it.
+
+<TLDR
+  problem="ER intake collects history, symptoms, and vitals from people who are in pain, disoriented, or frightened — at the exact moment their cognitive capacity is lowest."
+  approach="Scoped the kiosk to support triage rather than replace it · 11 prototype frames covering the full intake journey · a think-aloud usability test with a SUS questionnaire"
+  result="SUS 85 (Grade B, above average) — from a single participant, so treat it as a signal rather than a finding. The test broke the allergy screen, which front-loaded every option at once."
+/>
 
 ER waiting rooms operate under pressure by design. Patients arrive in pain, disoriented, or anxious. Triage nurses are overloaded. The intake process includes collecting medical history, logging symptoms, and capturing physiological data; the stress happens in a context where cognitive load is already at a peak.
 
@@ -27,7 +37,7 @@ The brief: design a medium-fidelity kiosk prototype that digitizes this intake p
 
 The design constraints pulled in two directions at once. An emergency kiosk needs to be fast enough for someone in distress to complete, but thorough enough to give a triage nurse clinically useful data. Too many fields and a patient struggling with pain or confusion abandons it. Too few and it fails the clinical purpose entirely.
 
-<SectionLabel>Context</SectionLabel>
+<SectionLabel>Research</SectionLabel>
 
 ## What the app does, and what it deliberately doesn't.
 
@@ -141,9 +151,9 @@ The queue screen also surfaces any preliminary instructions the triage team has 
     caption="Queue placement: position, estimated wait, and nurse-assigned instructions (e.g., 'Proceed to radiology'). Updated in real-time as the triage team reviews intake data."
 />
 
-<SectionLabel>Testing</SectionLabel>
+<SectionLabel>Validation</SectionLabel>
 
-## Peer usability test: SUS 85.
+## SUS 85 — from exactly one person.
 
 I ran a single-participant peer usability test with Kevin, a tech-literate peer with no prior exposure to the prototype. Before the session, I explained the scenario ("you are a patient who just arrived at an ER"), the session format (think-aloud, no guidance from me during tasks), and what the System Usability Scale (SUS) questionnaire would ask afterward. Kevin completed the full intake flow and then completed the 10-item SUS questionnaire.
 
@@ -171,6 +181,8 @@ The score places the prototype in the upper end of the "B" band. By conventional
 The SUS score and verbal feedback pointed in the same direction: the core experience was solid, but the parts that carry inherent medical complexity, such as allergy intake and multi-step history, were surfacing that complexity to the user rather than absorbing it.
 
 This is a real design problem in healthcare UX. The allergy screen overload and registration complexity aren't purely fixable with layout changes. Medical intake is genuinely complex, and there's a real tradeoff between clinical completeness and patient-facing simplicity. The assisted-use model addresses the worst cases: the care provider is there precisely for these situations. But the design should reduce how often that intervention is needed, and the specific screens Kevin flagged are the ones that most need iteration.
+
+**If this shipped, I would track it against:** intake completion rate without staff assistance, time from arrival to completed intake, abandonment on the allergy and physiological screens specifically, and the share of patients who correctly recall their queue position — the whole point of the wait-time surface.
 
 <SectionLabel>Reflection</SectionLabel>
 

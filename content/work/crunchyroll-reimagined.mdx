@@ -8,34 +8,66 @@ year: "2026"
 tag: "Web · UX Design · Streaming Services"
 order: 1
 cover: "/crunchyroll-reimagined-img/Image of Crunchyroll redesign hero component.png"
+tools:
+    - "React"
+    - "Vite"
+    - "Tailwind CSS"
+    - "Framer Motion"
+    - "Vercel"
+    - "Semi-structured interviews"
+    - "Affinity mapping"
+    - "Usability testing"
 outcomes:
-    - stat: "8"
-      desc: "User interviews with non-subscribing anime fans"
-    - stat: "6"
-      desc: "Root problems identified across research, audit, and secondary data"
-    - stat: "4"
-      desc: "Design directions built into a working React prototype"
+    - stat: "4.42/5"
+      desc: "Post-purchase welcome screen — highest-scoring question across a 12-person usability test, on the screen the original audit found most broken."
+    - stat: "4 of 6"
+      desc: "Lapsed and non-subscribing users who said the redesign addressed the specific objections that had kept them from paying."
+    - stat: "1 of 4"
+      desc: "Competitor homepages leading with price instead of content. Crunchyroll was the outlier — and moved to a content-first homepage after this study."
 ---
 
 <SectionLabel>The Challenge</SectionLabel>
 
-## Crunchyroll has 21 million subscribers and still can't convince anime fans to pay.
+## Crunchyroll sold the subscription before it showed the anime. Then it shipped my fix.
 
-**TL;DR:** I ran 8 user interviews, audited Crunchyroll's live signup flow end-to-end, and found the platform was asking people to pay before it had shown them anything worth paying for. I redesigned the four moments that mattered most, built the fix as a working React prototype, then usability-tested it on 12 people to check whether it actually worked. **[Live prototype →](https://crunchyroll-reimagined.vercel.app/)** · **[Repository →](https://github.com/jpop0393/crunchyroll-reimagined)**
+<TLDR
+  problem="Crunchyroll's homepage led with a pricing table and a countdown timer — before a single trailer. Every one of my 8 interview participants reacted negatively to it, without exception."
+  approach="8 interviews · full audit of the live signup flow · 4 redesigned touchpoints · a working React prototype · a 12-person usability test"
+  result="4.42/5 on the redesigned welcome screen, the highest score in the study. 4 of 6 lapsed users said their objections were addressed. Crunchyroll moved to a content-first homepage after this study was conducted."
+  prototype="https://crunchyroll-reimagined.vercel.app/"
+  repo="https://github.com/jpop0393/crunchyroll-reimagined"
+/>
+
+<ImpactModel
+  basis="Sizing the opportunity"
+  headline="A 2-point conversion lift is worth roughly $21M a year at Crunchyroll's scale."
+  disclaimer="This is an opportunity size, not a result. It uses public subscriber and revenue figures plus a standard industry benchmark to show what this class of change is worth. I did not run a live A/B test and make no claim to have moved conversion. Everything below the fold is measured, from a 12-participant usability study."
+>
+
+| Input | Value |
+| --- | --- |
+| Paid subscribers | 21M (Sony, 2026) |
+| Blended ARPU | ~$50/yr, from $1B+ reported revenue |
+| Benchmark lift, one conversion change | 2–3% |
+| **Value of 2 points** | **≈ 420,000 subscribers · ≈ $21M/yr** |
+
+</ImpactModel>
 
 Crunchyroll is the world's largest dedicated anime streaming platform. It has the catalog, the simulcasts, and the community. And yet a consistent pattern kept appearing: anime fans who _could_ subscribe don't. They stay on piracy sites, share accounts, or churn shortly after signing up. The question this project set out to answer was: **why?**
 
 The answer wasn't the content. It was the pitch. When I audited the site in early May 2026, the first thing a visitor saw was a pricing comparison table with a countdown timer, before a single trailer, a single series, or a single reason to care. The homepage was designed for someone who had already decided to subscribe. The majority of visitors hadn't decided yet. The site gave them nothing to help them decide.
 
-<Figure
-    src="/crunchyroll-reimagined-img/Image of Crunchyroll redesign homepage audit.png"
-    alt="Audited Crunchyroll homepage with pricing table and countdown timer"
-    caption="The audited homepage. The first thing a visitor sees is a pricing table, not content, not community, not even a trailer."
+<Compare
+    before="/crunchyroll-reimagined-img/before-homepage.png"
+    after="/crunchyroll-reimagined-img/after-homepage.png"
+    beforeAlt="The audited Crunchyroll homepage, leading with a pricing table and a countdown timer"
+    afterAlt="The redesigned homepage, leading with a full-bleed featured series"
+    caption="Drag to compare the first thing a visitor sees. Before: a pricing table and a countdown timer. After: a show."
 />
 
 The goal was to redesign the key conversion touchpoints, including homepage, paywall, onboarding, and post-purchase, around a single principle borrowed from Gabe Newell: **build value before you pitch it.** Show people why anime matters. Let the platform speak for itself. Only introduce the subscription model at the moment when a user has something to lose by not paying.
 
-_Post-audit note: Crunchyroll updated their homepage to a more content-first design after this study was conducted, confirming that the pricing-first layout was a genuine problem significant enough for the platform itself to address._
+**Postscript: Crunchyroll moved to a content-first homepage after this study was conducted.** I have no claim on that decision and no evidence they ever saw this work. But it is the strongest available confirmation that the pricing-first layout was a real problem, and not just one I found interesting — the platform reached the same conclusion and changed the page.
 
 **What I set out to do:**
 - Understand why anime-interested users who could subscribe don't
@@ -50,7 +82,19 @@ If this shipped, I'd track it against homepage-to-content engagement rate, trial
 
 I conducted 8 semi-structured interviews over four days (May 8-11, 2026) with anime-watching participants who don't hold an active Crunchyroll subscription. The group included piracy pragmatists, lapsed paid subscribers, lapsed free-tier users, and people new to anime, deliberately chosen to span the full range of non-conversion reasons rather than a single segment.
 
-That spread mapped to five personas that recur through the rest of the case study: the **Piracy Pragmatist** (a frictionless free habit that's hard to beat on convenience, let alone price), the **Lapsed Subscriber** (paid before, drifted away, remembers a better version of the platform), the **Value Analyst** (runs the actual math and isn't convinced), the **Anime Curious** (hasn't committed to the medium yet and doesn't have the vocabulary for it), and the **Passive Browser** (arrives goal-directed, just wants to search for one title). Every design direction in the Process section below targets one or two of these specifically, not "users" in the abstract.
+That spread mapped to five personas. Every design direction in the Process section targets one or two of these specifically, not "users" in the abstract.
+
+<Table>
+
+| Persona | Why they don't pay | What it drove in the redesign |
+| --- | --- | --- |
+| **Piracy Pragmatist** | A frictionless free habit that's hard to beat on convenience, let alone price | Free first episode, no account required |
+| **Lapsed Subscriber** | Paid before, drifted away, remembers a better version of the platform | Post-purchase welcome screen |
+| **Value Analyst** | Runs the actual math and isn't convinced | Pricing moved below four content proof points |
+| **Anime Curious** | Hasn't committed to the medium yet, and lacks the vocabulary for it | "Start Here" flow that never asks about genre |
+| **Passive Browser** | Arrives goal-directed, just wants to search for one title | Search — still unbuilt, and the study's sharpest miss |
+
+</Table>
 
 <Figure
     src="/crunchyroll-reimagined-img/Image of Crunchyroll redesign affinity map.png"
@@ -58,18 +102,39 @@ That spread mapped to five personas that recur through the rest of the case stud
     caption="Eight interviews collapsed into six root problems. Every finding mapped back to one or more of these."
 />
 
-The primary research uncovered ten themes, but six root problems drove everything:
+The primary research uncovered ten themes. Six root problems drove everything:
+
+<ProblemCards>
 
 1. **A homepage that pitches instead of seduces.** Every participant reacted negatively to the pricing-first layout. Without exception.
-2. **Piracy has made "free" the default.** Five of eight participants use piracy primarily, not because they can't pay, but because the zero-friction experience has become the baseline.
-3. **Reputation damage that predates the visit.** Four participants arrived with concrete concerns about AI-assisted subtitles and employee layoffs before they'd even seen the site.
-4. **No path for the undecided.** With the free tier removed, the platform offered exactly one entry point: pay now, with a card, upfront. A hands-on audit of the live signup flow confirmed it was worse than it looked: the "START FREE TRIAL" button advertised across the homepage, nav, and paywall never led to a trial. It led to an immediate CA$2.99 charge.
-5. **The platform has lost its social currency.** Crunchyroll's increasingly niche catalog means the shows it hosts are often things nobody in your social circle is watching, paying for content _and_ watching alone.
-6. **The platform signals low confidence in its own product.** A countdown timer and a deep promotional discount on the homepage don't just fail to seduce, they read as desperation. As one participant put it, competitors "would never offer such a thing because they know their product is worth the money."
+2. **Piracy has made "free" the default.** Five of eight use piracy primarily — not because they can't pay, but because zero friction has become the baseline.
+3. **Reputation damage that predates the visit.** Four arrived with concrete concerns about AI-assisted subtitles and layoffs before they'd even seen the site.
+4. **No path for the undecided.** One entry point: pay now, with a card, upfront. The "START FREE TRIAL" button never led to a trial — it led to an immediate CA$2.99 charge.
+5. **The platform has lost its social currency.** An increasingly niche catalog means paying for content and watching it alone, with nobody in your circle to talk to about it.
+6. **It signals low confidence in its own product.** A countdown timer and a deep discount read as desperation. One participant: competitors "would never offer such a thing because they know their product is worth the money."
 
-Secondary research across App Store reviews, Reddit, Trustpilot, and PCMag validated every primary finding at scale. One specific detail from secondary research proved critical: in Fall 2025, subtitles for _Necronomico and the Cosmic Horror Show_ contained the phrase **"ChatGPT said..."** in the German track, direct evidence of AI use in localization, and the documented source of the reputation damage participants described.
+</ProblemCards>
 
-A competitive audit of Netflix, HIDIVE, and a piracy site reinforced the same pattern from a different angle: three of four homepages led with content before price. Crunchyroll was the outlier. Even HIDIVE, a platform its own users describe as worse-designed than Crunchyroll, got this one principle right.
+**Three of four competitor homepages led with content before price. Crunchyroll was the outlier.** Even HIDIVE — a platform its own users describe as worse-designed than Crunchyroll — got this one principle right.
+
+<Table caption="Competitive audit, May 2026. The outlier is the one that has to convince people to pay.">
+
+| Platform | What's above the fold | Leads with |
+| --- | --- | --- |
+| **Netflix** | Full-bleed featured title, then rows | Content |
+| **HIDIVE** | Simulcast hero and catalog | Content |
+| **Piracy site** | Latest episodes grid | Content |
+| **Crunchyroll** | Pricing comparison table with a countdown timer | **Price** |
+
+</Table>
+
+<Accordion title="Secondary research: how the reputation damage is documented" note="App Store · Reddit · Trustpilot · PCMag">
+
+Secondary research validated every primary finding at scale. One detail proved critical: in Fall 2025, subtitles for _Necronomico and the Cosmic Horror Show_ contained the phrase **"ChatGPT said..."** in the German track — direct evidence of AI use in localization, and the documented source of the reputation damage participants described.
+
+That matters because it moves RP3 out of the realm of vibes. Participants weren't repeating a rumour; they were reacting to a specific, verifiable incident. A trust problem with a traceable cause is a trust problem a design can actually answer.
+
+</Accordion>
 
 > "If you're here, you're here to pay. And if you're not, then you can get out."
 >
@@ -79,7 +144,15 @@ A competitive audit of Netflix, HIDIVE, and a piracy site reinforced the same pa
 
 ## How I got from problem to solution.
 
-Each root problem got reframed as a How-Might-We question before any screen got designed. Root Problem 1 became: *"How might we redesign the first 10 seconds of the homepage so a visitor encounters content, not pricing, and feels curious enough to stay?"* Root Problem 4 became: *"How might we eliminate the gap between what 'Start Free Trial' promises and what the signup flow actually delivers?"* Six root problems produced a longer list of HMWs than directions — the four directions below are the ones that survived scoping against what a solo, three-week build could actually ship, each targeted at a specific persona from the Research section above. Rather than produce static mockups, I built the directions as a working React + Vite prototype using Tailwind CSS and Framer Motion, deployed to Vercel. The reasoning is methodological: Newell's principle applies to the case study itself. A live prototype demonstrates value in a way a Figma comp can't.
+Every root problem got reframed as a How-Might-We question before a single screen got designed.
+
+> *"How might we redesign the first 10 seconds of the homepage so a visitor encounters content, not pricing, and feels curious enough to stay?"* — from RP1
+>
+> *"How might we eliminate the gap between what 'Start Free Trial' promises and what the signup flow actually delivers?"* — from RP4
+
+Six problems produced more HMWs than I could build. The four directions below are the ones that survived scoping against a solo, three-week build, each aimed at a specific persona rather than "users" in general.
+
+**I built them as a working prototype, not a Figma comp** — React + Vite, Tailwind, Framer Motion, deployed to Vercel. The reasoning is the same principle the redesign is built on, applied to the case study itself: demonstrate the value before asking anyone to believe in it.
 
 <Figure
     src="/crunchyroll-reimagined-img/Image of Crunchyroll comparison full homepage.png"
@@ -97,23 +170,31 @@ Each root problem got reframed as a How-Might-We question before any screen got 
 
 **"Start Here" for undecided visitors.** A three-question, skippable flow (mood, time available, familiarity with anime) returns 2-3 personalized picks with editorial, human-voiced blurbs instead of algorithmic tags. It deliberately avoids asking "what genre do you like," since the research showed newcomers don't have that vocabulary yet.
 
-<Figure
-    src="/crunchyroll-reimagined-img/Image of Crunchyroll comparison episode paywall gate.png"
-    alt="Side-by-side comparison of the live Crunchyroll episode paywall versus the redesigned end-of-episode gate"
-    caption="Before: the live paywall fires the instant you click any episode, before you've watched a frame. After: Episode 1 plays free, and the ask only appears once you're already invested in Episode 2."
+<Compare
+    before="/crunchyroll-reimagined-img/before-episode-paywall.png"
+    after="/crunchyroll-reimagined-img/after-episode-paywall.png"
+    beforeAlt="The live Crunchyroll paywall, firing the moment an episode is clicked"
+    afterAlt="The redesigned end-of-episode gate, appearing only after Episode 1 has played"
+    caption="Drag to compare. Before: the paywall fires the instant you click any episode, before you've watched a frame. After: Episode 1 plays free, and the ask only appears once you're invested in Episode 2."
 />
 
 The checkout itself had the same problem, just further downstream. Every CTA on the live site said "Start Free Trial." The actual checkout page charged CA$2.99 immediately, with no trial in sight — the promotional flow had silently swapped one for the other. Andrew's interview answer became the fix: "no credit card" isn't a feature bullet in the redesign, it's the headline.
 
-<Figure
-    src="/crunchyroll-reimagined-img/Image of Crunchyroll comparison checkout bait and switch.png"
-    alt="Side-by-side comparison of the live Crunchyroll checkout versus the redesigned signup page"
-    caption="Before: 'Start Free Trial' leads to a credit-card form charging CA$2.99 today. After: the same promise, kept — two fields, no card, stated plainly."
+<Compare
+    before="/crunchyroll-reimagined-img/before-checkout.png"
+    after="/crunchyroll-reimagined-img/after-checkout.png"
+    beforeAlt="The live Crunchyroll checkout, showing a credit card form and CA$2.99 due today"
+    afterAlt="The redesigned signup page: two fields, no credit card"
+    caption="Drag to compare. Before: 'Start Free Trial' leads to a credit-card form charging CA$2.99 today. After: the same promise, kept — two fields, no card, stated plainly."
 />
 
-**A small, deliberate visual system.** Two brand colors carry the whole UI: orange (`#ff5e00`) for every primary action, and teal (`#2abdbb`) reserved only for trust signals so it never competes with a conversion CTA. Display type targets Crunchyroll's own licensed typeface, falling back to Inter since that font isn't publicly available; body copy runs in DM Sans throughout. Every button uses the same 48px pill radius across all six pages — small consistency choices like this are what keep a prototype from reading as a collection of disconnected screens.
+<Accordion title="The visual system and how the prototype is built" note="Colour, type, routing">
 
-The prototype covers the full conversion loop: content-first homepage → browse row → series detail → free episode playback → end-of-episode gate → plans page → sign-up → post-purchase welcome. All routing is handled client-side via React Router; series data is static and mocked, making the prototype reproducible without infrastructure.
+**Two brand colours carry the whole UI.** Orange (`#ff5e00`) for every primary action, and teal (`#2abdbb`) reserved only for trust signals so it never competes with a conversion CTA. Display type targets Crunchyroll's own licensed typeface, falling back to Inter since that font isn't publicly available; body copy runs in DM Sans throughout. Every button uses the same 48px pill radius across all six pages — small consistency choices like this are what keep a prototype from reading as a collection of disconnected screens.
+
+**The prototype covers the full conversion loop:** content-first homepage → browse row → series detail → free episode playback → end-of-episode gate → plans page → sign-up → post-purchase welcome. Routing is client-side via React Router; series data is static and mocked, so the prototype is reproducible without any infrastructure.
+
+</Accordion>
 
 **[Live prototype →](https://crunchyroll-reimagined.vercel.app/)** · **[Repository →](https://github.com/jpop0393/crunchyroll-reimagined)**
 

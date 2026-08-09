@@ -8,18 +8,29 @@ year: "2024"
 tag: "Tablet · UX Research · Safety"
 order: 5
 cover: "/home-security-system-redesign-img/cover.png"
+tools:
+    - "Figma"
+    - "PSSUQ"
+    - "NASA TLX"
+    - "Stress simulation"
 outcomes:
     - stat: "132 bpm"
-      desc: "Measured stress heart rate in the break-in simulation, up from a 78 bpm resting baseline, confirming the disarm task runs under genuine physiological load."
-    - stat: "PSSUQ + TLX"
-      desc: "Two peer usability evaluations using the PSSUQ and NASA TLX. Temporal demand scored highest across both participants, pointing every redesign decision at speed."
+      desc: "Measured heart rate during the break-in simulation, up from a 78 bpm resting baseline — proof the disarm task runs under genuine physiological load."
+    - stat: "2 of 2"
+      desc: "Participants who accidentally cancelled a real emergency dispatch on the original design. That one finding removed the redundant 5-second confirmation."
     - stat: "5"
-      desc: "Design changes shipped after testing: removed the redundant 5-second confirmation, flagged suspicious clips, added an all-clips view, passcode reset, and autoplay live feed."
+      desc: "Design changes shipped after testing: the confirmation overlay removed, suspicious clips flagged, an all-clips view, passcode reset, and autoplay live feed."
 ---
 
 <SectionLabel>The Challenge</SectionLabel>
 
 ## A safety-critical system still running on a numeric keypad and four blinking lights.
+
+<TLDR
+  problem="Legacy home security still ships a numeric keypad, a one-line LCD, and four LEDs. Sensor states map to numbers the user has to memorise — and the same numbers double as error codes."
+  approach="Two project cycles · a touchscreen console redesign · two peer evaluations using PSSUQ and NASA TLX · a psychophysiological break-in simulation"
+  result="Heart rate hit 132 bpm against a 78 bpm baseline, confirming the disarm task runs under real stress. Both participants accidentally cancelled a live emergency dispatch, which killed the redundant 5-second confirmation and drove four further changes."
+/>
 
 Traditional building security systems still ship with a wall-mounted numeric keypad, a single-row seven-segment LCD, and four LED status lights. We pulled one apart in preliminary research and found the interaction model badly dated. Sensor status is shown as a number on the LCD that maps to a sensor only via an external memo or the user's long-term memory, raising cognitive load. The same number scheme doubles as the error-code system, compounding the confusion. Feedback is four lights and a string of digits that, in practice, tell the user almost nothing.
 
@@ -27,7 +38,7 @@ The stakes are not cosmetic. We argued the system is safety-critical: per FBI re
 
 The brief: digitally transform this legacy system into a modern touchscreen console that fixes the feedback gap, lowers cognitive load, and survives the high-pressure moments the product exists for.
 
-<SectionLabel>Context</SectionLabel>
+<SectionLabel>Research</SectionLabel>
 
 ## A two-person build, then a solo stress test.
 
@@ -37,7 +48,7 @@ The work ran across two cycles. The first built the digital console, evaluated i
 
 Our plan was deliberate: inventory the legacy system's features and flow, port them to a digital interface while fixing the feedback and cognitive-load problems, borrow proven patterns from modern digital security products, then prototype low-fidelity, then high-fidelity and interactive against the improved workflow.
 
-<SectionLabel>The Prototype</SectionLabel>
+<SectionLabel>Process</SectionLabel>
 
 ## One dashboard for arming, cameras, and emergencies.
 
@@ -57,7 +68,7 @@ The high-fidelity Figma prototype centers on a single dark dashboard: sensors gr
 
 The camera section was the part I owned. Each feed opens to a live view with full camera details, and an activity strip of recent clips runs along the bottom for quick review.
 
-<SectionLabel>Evaluation</SectionLabel>
+<SectionLabel>Validation</SectionLabel>
 
 ## Two peers, PSSUQ and NASA TLX.
 
@@ -145,7 +156,7 @@ Participant one tried to play back clips and could not, and a play button on the
 
 Participant two flagged that there was no way to change a passcode if a user forgot or wanted to update it. We added a passcode-change feature with a verification step for forgotten codes, available only while the system is disarmed for security.
 
-<SectionLabel>Going Deeper</SectionLabel>
+<SectionLabel>Stress Testing</SectionLabel>
 
 ## Measuring the stress the disarm task actually produces.
 
@@ -213,6 +224,8 @@ I closed with an analytics program for a live product: five tracking categories 
 **Segment by:** age group, geographic location, and language. Each segment changes the read. Older users may make more errors on small targets, areas with unstable power may show error spikes from resets, and non-native speakers on an English-only system may be slower and more error-prone, which is the signal that tells you where translation and larger targets actually pay off.
 
 The throughline: navigation data turns a guess about confusion into evidence. If users repeatedly bounce from the camera page to settings looking for camera settings, that is a logged path you can fix, not a hunch.
+
+**If this shipped, I would track it against:** time to disarm under alarm conditions, false-dispatch rate (the metric the 5-second overlay was silently inflating), how often users review flagged clips versus all clips, and passcode-reset completion without a support call.
 
 <SectionLabel>Reflection</SectionLabel>
 
