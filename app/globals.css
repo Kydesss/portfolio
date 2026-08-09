@@ -953,47 +953,80 @@ footer {
   -webkit-overflow-scrolling: touch;
 }
 
-.case-table {
+/* Targets the <table> markdown generates inside <Table>, which carries no
+   class of its own — so these must not be scoped to `.case-table`. */
+.case-table-wrap table {
   width: 100%;
-  min-width: 520px;
+  min-width: 560px;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  /* Needed for the radius to clip the header's background. */
+  overflow: hidden;
 }
 
-.case-table th,
-.case-table td {
+.case-table-wrap th,
+.case-table-wrap td {
   text-align: left;
   vertical-align: top;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--line);
-  line-height: 1.5;
+  /* Generous horizontal padding is what actually separates the columns —
+     without it three columns of prose run straight into each other. */
+  padding: 0.95rem 1.35rem;
+  line-height: 1.6;
 }
 
-.case-table thead th {
-  font-size: 0.72rem;
-  font-weight: 600;
+/* Column divider, so a wrapped cell can't be mistaken for its neighbour. */
+.case-table-wrap th + th,
+.case-table-wrap td + td,
+.case-table-wrap th + td {
+  border-left: 1px solid var(--line);
+}
+
+.case-table-wrap thead th {
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  border-bottom-color: var(--fg-muted);
+  /* A step stronger than the zebra rows, or the header stops reading as one. */
+  background: var(--hover);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.case-table-wrap tbody tr + tr th,
+.case-table-wrap tbody tr + tr td {
+  border-top: 1px solid var(--line);
+}
+
+/* Zebra banding carries the eye across a wide row. */
+.case-table-wrap tbody tr:nth-child(even) th,
+.case-table-wrap tbody tr:nth-child(even) td {
+  background: var(--bg-elevated);
+}
+
+.case-table-wrap tbody td { color: var(--fg-muted); }
+
+/* Markdown emits <td> for every body cell, not <th>, so the first column is
+   styled positionally. Names are short — keeping them on one line makes the
+   column read as a label rather than more prose. */
+.case-table-wrap tbody td:first-child {
+  color: var(--fg);
   white-space: nowrap;
 }
 
-.case-table tbody th {
-  font-weight: 500;
-  white-space: nowrap;
-}
+.case-table-wrap tbody td:first-child strong { font-weight: 600; }
 
-.case-table tbody td { color: var(--fg-muted); }
-.case-table tbody tr:last-child th,
-.case-table tbody tr:last-child td { border-bottom: none; }
-.case-table tbody tr:hover td,
-.case-table tbody tr:hover th { background: var(--hover); }
+.case-table-wrap tbody tr:hover th,
+.case-table-wrap tbody tr:hover td { background: var(--hover); }
 
 .case-table-wrap figcaption {
   font-size: 0.85rem;
   color: var(--fg-muted);
-  margin-top: 0.75rem;
+  margin-top: 0.85rem;
 }
 
 /* ───── TL;DR ───── */
