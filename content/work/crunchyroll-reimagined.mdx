@@ -66,6 +66,7 @@ Crunchyroll has the catalog, the simulcasts, and the community. And yet anime fa
     after="/crunchyroll-reimagined-img/after-homepage.png"
     beforeAlt="The audited Crunchyroll homepage, leading with a pricing table and a countdown timer"
     afterAlt="The redesigned homepage, leading with a full-bleed featured series"
+    title="The first thing a visitor saw was a price, not a show"
     caption="Drag to compare the first thing a visitor sees. Before: a pricing table and a countdown timer. After: a show."
 />
 
@@ -83,11 +84,18 @@ I redesigned the four conversion touchpoints — homepage, paywall, onboarding, 
 
 <SectionLabel>Research</SectionLabel>
 
-## What I learned.
+## Eight interviews. Not one person defended the homepage.
 
-I conducted 8 semi-structured interviews over four days (May 8-11, 2026) with anime-watching participants who don't hold an active Crunchyroll subscription. The group included piracy pragmatists, lapsed paid subscribers, lapsed free-tier users, and people new to anime, deliberately chosen to span the full range of non-conversion reasons rather than a single segment.
+<StatGrid>
+  <Stat value="8" label="Interviews" note="Semi-structured, May 8–11 2026" />
+  <Stat value="0" label="Subscribers" note="Every participant was lapsed, free-tier, or new to anime" />
+  <Stat value="10" label="Themes" note="Collapsed into six root problems" />
+  <Stat value="4" label="Sources" note="App Store, Reddit, Trustpilot and PCMag, to validate at scale" />
+</StatGrid>
 
-That spread mapped to five personas. Every design direction in the Process section targets one or two of these specifically, not "users" in the abstract.
+### Five personas, five reasons not to pay
+
+Every design direction targets one or two of these specifically, not "users" in the abstract.
 
 <Table>
 
@@ -104,10 +112,11 @@ That spread mapped to five personas. Every design direction in the Process secti
 <Figure
     src="/crunchyroll-reimagined-img/Image of Crunchyroll redesign affinity map.png"
     alt="Affinity map showing six root problems"
-    caption="Eight interviews collapsed into six root problems. Every finding mapped back to one or more of these."
+    title="Eight interviews, collapsed into six root problems"
+    caption="Ten themes came out of the transcripts. Six of them drove everything that followed."
 />
 
-The primary research uncovered ten themes. Six root problems drove everything:
+### The six problems everything else traced back to
 
 <ProblemCards>
 
@@ -120,7 +129,9 @@ The primary research uncovered ten themes. Six root problems drove everything:
 
 </ProblemCards>
 
-**Three of four competitor homepages led with content before price. Crunchyroll was the outlier.** Even HIDIVE — a platform its own users describe as worse-designed than Crunchyroll — got this one principle right.
+### Three of four competitors led with content. Crunchyroll didn't.
+
+Even HIDIVE — a platform its own users call worse-designed than Crunchyroll — got this one right.
 
 <Table caption="Competitive audit, May 2026. The outlier is the one that has to convince people to pay.">
 
@@ -149,19 +160,22 @@ That matters because it moves RP3 out of the realm of vibes. Participants weren'
 
 ## How I got from problem to solution.
 
-Every root problem got reframed as a How-Might-We question before a single screen got designed.
+### Every problem became a How-Might-We before any screen got drawn
 
 > *"How might we redesign the first 10 seconds of the homepage so a visitor encounters content, not pricing, and feels curious enough to stay?"* — from RP1
 >
 > *"How might we eliminate the gap between what 'Start Free Trial' promises and what the signup flow actually delivers?"* — from RP4
 
-Six problems produced more HMWs than I could build. The four directions below are the ones that survived scoping against a solo, three-week build, each aimed at a specific persona rather than "users" in general.
+Six problems produced more HMWs than a solo three-week build could ship. Four survived.
 
-**I built them as a working prototype, not a Figma comp** — React + Vite, Tailwind, Framer Motion, deployed to Vercel. The reasoning is the same principle the redesign is built on, applied to the case study itself: demonstrate the value before asking anyone to believe in it.
+### Built as a working prototype, not a Figma comp
+
+React + Vite, Tailwind, Framer Motion, on Vercel. Same principle as the redesign, applied to the case study itself: demonstrate the value before asking anyone to believe in it.
 
 <Figure
     src="/crunchyroll-reimagined-img/Image of Crunchyroll comparison full homepage.png"
     alt="Full-page side-by-side comparison of the live Crunchyroll homepage versus the redesigned homepage, hero to footer"
+    title="The redesign runs 40% longer — every extra pixel earns the ask"
     caption="The full homepage, hero to footer. The redesign runs 40% longer than the audited page — every extra pixel is a show, a trust signal, or a reason to keep scrolling. Pricing shows up two-thirds of the way down, after four separate content proof points."
 />
 
@@ -198,16 +212,20 @@ A skippable flow asking mood, time available, and familiarity, returning two or 
     after="/crunchyroll-reimagined-img/after-episode-paywall.png"
     beforeAlt="The live Crunchyroll paywall, firing the moment an episode is clicked"
     afterAlt="The redesigned end-of-episode gate, appearing only after Episode 1 has played"
+    title="The paywall moved from the front door to the end of Episode 1"
     caption="Drag to compare. Before: the paywall fires the instant you click any episode, before you've watched a frame. After: Episode 1 plays free, and the ask only appears once you're invested in Episode 2."
 />
 
-The checkout itself had the same problem, just further downstream. Every CTA on the live site said "Start Free Trial." The actual checkout page charged CA$2.99 immediately, with no trial in sight — the promotional flow had silently swapped one for the other. Andrew's interview answer became the fix: "no credit card" isn't a feature bullet in the redesign, it's the headline.
+### The same problem, one step downstream
+
+Every CTA said "Start Free Trial." Checkout charged CA$2.99 immediately. Andrew's interview answer became the fix — "no credit card" isn't a feature bullet in the redesign, it's the headline.
 
 <Compare
     before="/crunchyroll-reimagined-img/before-checkout.png"
     after="/crunchyroll-reimagined-img/after-checkout.png"
     beforeAlt="The live Crunchyroll checkout, showing a credit card form and CA$2.99 due today"
     afterAlt="The redesigned signup page: two fields, no credit card"
+    title="The promise the checkout page finally keeps"
     caption="Drag to compare. Before: 'Start Free Trial' leads to a credit-card form charging CA$2.99 today. After: the same promise, kept — two fields, no card, stated plainly."
 />
 
@@ -232,7 +250,7 @@ The checkout itself had the same problem, just further downstream. Every CTA on 
   <Stat value="7 days" label="Fieldwork" note="June 12–18, 2026" />
 </StatGrid>
 
-The two biggest wins matched the two biggest problems from the research.
+### The two biggest wins matched the two biggest problems
 
 <ResultGrid>
 
@@ -253,10 +271,11 @@ Eight of twelve flagged it as noticeably different. One returning participant: t
 <Figure
     src="/crunchyroll-reimagined-img/Image of Crunchyroll comparison post-purchase welcome.png"
     alt="Side-by-side comparison of the live Crunchyroll post-purchase welcome page versus the redesigned welcome screen"
+    title="What a new subscriber saw first: a car game"
     caption="Before: the first thing a new subscriber sees is a Forza Horizon 6 cross-promotion. After: a confirmation and a single CTA back to the episode that drove the subscription."
 />
 
-It also caught three things I had missed.
+### It also caught three things I had missed
 
 <ResultGrid>
 
@@ -290,7 +309,7 @@ The Trending Row's header — "What critics and fans agree on" — was written f
 
 <SectionLabel>Reflection</SectionLabel>
 
-## What I took away.
+## No single screen was broken. The aggregate was.
 
 **No single screen was catastrophic. The aggregate was.** The audited experience read as adversarial only when you walked the whole flow — which is why the fix had to be a principle, not a redesign of one page.
 

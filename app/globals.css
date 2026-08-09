@@ -938,6 +938,18 @@ footer {
   margin: 0;
 }
 
+/* Heading above a figure. Left-aligned against the prose column even though the
+   caption below is centred — it's a sub-header, not part of the image.
+   Scoped under .prose so it beats `.prose h3`, whose 3rem top margin would
+   otherwise push it away from the image it labels; the figure's own margin
+   already supplies the separation. Size and weight are inherited from
+   `.prose h3` on purpose, so figure headers sit at the same level as the
+   written sub-headers around them. */
+.prose .figure-title {
+  line-height: 1.3;
+  margin: 0 0 0.9rem;
+}
+
 .figure figcaption {
   font-size: 0.85rem;
   color: var(--fg-muted);
