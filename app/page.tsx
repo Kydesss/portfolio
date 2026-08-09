@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { siteConfig } from '@/lib/site-config';
-import { getAllWork, getWorkThumbnail } from '@/lib/content';
+import { getAllWork, getWorkThumbnails } from '@/lib/content';
+import { WorkThumb } from '@/components/WorkThumb';
 import { Footer } from '@/components/Footer';
 import { ToolsStrip } from '@/components/ToolsStrip';
 import { JsonLd } from '@/components/JsonLd';
@@ -105,25 +106,11 @@ export default function HomePage() {
                 <span className="num">{String(i + 1).padStart(2, '0')}</span>
                 {/* A design portfolio whose work list has no pictures of the
                     work gives a scanning reader nothing to catch. */}
-                <span className="work-thumb" aria-hidden="true">
-                  {(() => {
-                    const thumb = getWorkThumbnail(w.frontmatter);
-                    if (!thumb) {
-                      return <span className="work-thumb-fallback">{w.frontmatter.year}</span>;
-                    }
-                    return (
-                      <>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={thumb} alt="" loading="lazy" decoding="async" />
-                        {/* Only when the thumbnail *is* a video poster frame —
-                            a real cover image shouldn't claim to be playable. */}
-                        {!w.frontmatter.cover && w.frontmatter.coverVideo && (
-                          <span className="work-thumb-play">▶</span>
-                        )}
-                      </>
-                    );
-                  })()}
-                </span>
+                <WorkThumb
+                  images={getWorkThumbnails(w.frontmatter)}
+                  row={i}
+                  fallback={w.frontmatter.year}
+                />
                 <span className="work-body">
                   <span className="title">{w.frontmatter.title}</span>
                   <span className="work-summary">{w.frontmatter.summary}</span>
@@ -131,7 +118,9 @@ export default function HomePage() {
                     <span className="work-stats">
                       {w.frontmatter.outcomes.slice(0, 2).map((o, oi) => (
                         <span key={oi} className="work-stat">
-                          <b>{o.stat}</b> {o.desc.split(/[.,]/)[0]}
+                          {/* First sentence only. Splitting on commas too used
+                              to cut mid-citation, e.g. "(Chorostil & Ranger". */}
+                          <b>{o.stat}</b> {o.desc.split(/(?<=\.)\s|\s—\s/)[0]}
                         </span>
                       ))}
                     </span>

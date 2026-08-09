@@ -261,16 +261,51 @@ main { padding-top: 5rem; }
   border: 1px solid var(--line);
 }
 
+/* Frames are stacked and cross-faded, so the row never reflows as they cycle.
+   The first frame stays visible underneath, which is what renders before
+   hydration and with JS off. */
 .work-thumb img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
   display: block;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Exactly one frame carries .is-active at any time — including in the server
+   HTML, since the component's state starts at 0. Keep this the only rule that
+   raises opacity: earlier attempts also used :first-of-type and :has(), which
+   fought this one and left frames either doubled up or all faded out. */
+.work-thumb img.is-active { opacity: 1; z-index: 1; }
+
 .work-item:hover .work-thumb img { transform: scale(1.06); }
+
+.work-thumb-dots {
+  position: absolute;
+  z-index: 2;
+  right: 0.45rem;
+  bottom: 0.45rem;
+  display: flex;
+  gap: 0.22rem;
+  padding: 0.22rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.work-thumb-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background-color 0.4s ease;
+}
+
+.work-thumb-dots span.is-active { background: #fff; }
 
 .work-thumb-play {
   position: absolute;
@@ -333,6 +368,14 @@ main { padding-top: 5rem; }
   margin-top: 0.2rem;
   font-size: 0.8rem;
   color: var(--fg-muted);
+}
+
+.work-stat {
+  /* Long stat sentences get elided rather than wrapping the row. */
+  max-width: 34ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .work-stat b {

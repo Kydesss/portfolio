@@ -21,6 +21,9 @@ export type WorkFrontmatter = {
   tools?: string[];
   // Optional external links (live prototype, repo, Figma file).
   prototype?: string;
+  // Frames cycled by the work-list thumbnail. Prefer images wider than they
+  // are tall — the slot is 16:10 and crops from the centre.
+  thumbnails?: string[];
 };
 
 // Normalize a YouTube/Vimeo URL into an embeddable src. Returns null if unrecognized.
@@ -94,6 +97,19 @@ export function getWorkThumbnail(fm: WorkFrontmatter): string | null {
     return `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
   }
   return null;
+}
+
+/**
+ * Frames for the work-list thumbnail carousel.
+ *
+ * A single cover only ever shows one crop, and these projects run to six or
+ * more screens — so `thumbnails` in frontmatter lists what to cycle through.
+ * Falls back to the single cover (or video poster) when it isn't set.
+ */
+export function getWorkThumbnails(fm: WorkFrontmatter): string[] {
+  if (fm.thumbnails && fm.thumbnails.length > 0) return fm.thumbnails;
+  const single = getWorkThumbnail(fm);
+  return single ? [single] : [];
 }
 
 export type WorkItem = {
