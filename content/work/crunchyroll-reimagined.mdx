@@ -57,9 +57,9 @@ outcomes:
 
 </ImpactModel>
 
-Crunchyroll is the world's largest dedicated anime streaming platform. It has the catalog, the simulcasts, and the community. And yet a consistent pattern kept appearing: anime fans who _could_ subscribe don't. They stay on piracy sites, share accounts, or churn shortly after signing up. The question this project set out to answer was: **why?**
+Crunchyroll has the catalog, the simulcasts, and the community. And yet anime fans who _could_ subscribe don't — they stay on piracy sites, share accounts, or churn soon after signing up. This project set out to answer why.
 
-The answer wasn't the content. It was the pitch. When I audited the site in early May 2026, the first thing a visitor saw was a pricing comparison table with a countdown timer, before a single trailer, a single series, or a single reason to care. The homepage was designed for someone who had already decided to subscribe. The majority of visitors hadn't decided yet. The site gave them nothing to help them decide.
+**The answer wasn't the content. It was the pitch.** When I audited the site in May 2026, the first thing a visitor saw was a pricing table with a countdown timer — before a single trailer or series. The homepage was built for someone who had already decided to subscribe. Most visitors hadn't.
 
 <Compare
     before="/crunchyroll-reimagined-img/before-homepage.png"
@@ -69,16 +69,17 @@ The answer wasn't the content. It was the pitch. When I audited the site in earl
     caption="Drag to compare the first thing a visitor sees. Before: a pricing table and a countdown timer. After: a show."
 />
 
-The goal was to redesign the key conversion touchpoints, including homepage, paywall, onboarding, and post-purchase, around a single principle borrowed from Gabe Newell: **build value before you pitch it.** Show people why anime matters. Let the platform speak for itself. Only introduce the subscription model at the moment when a user has something to lose by not paying.
+I redesigned the four conversion touchpoints — homepage, paywall, onboarding, post-purchase — around one principle borrowed from Gabe Newell: **build value before you pitch it.** Introduce the subscription only once the visitor has something to lose by not paying.
 
-**Postscript: Crunchyroll moved to a content-first homepage after this study was conducted.** I have no claim on that decision and no evidence they ever saw this work. But it is the strongest available confirmation that the pricing-first layout was a real problem, and not just one I found interesting — the platform reached the same conclusion and changed the page.
+**Postscript: Crunchyroll moved to a content-first homepage after this study.** I have no claim on that decision and no evidence they saw this work. But the platform reached the same conclusion and changed the page, which is the strongest available confirmation the problem was real.
 
-**What I set out to do:**
-- Understand why anime-interested users who could subscribe don't
-- Pin down the specific UX failures driving friction, distrust, or disengagement — not just "the homepage feels off"
-- Redesign the touchpoints so people feel value before they're asked to pay
+<Accordion title="Objectives, and what I'd measure if it shipped" note="Success criteria">
 
-If this shipped, I'd track it against homepage-to-content engagement rate, trial-to-paid conversion, whether a new subscriber plays anything within 24 hours of signing up, and homepage bounce rate.
+**What I set out to do:** understand why anime-interested users who could subscribe don't; pin down the specific UX failures driving friction, distrust, or disengagement rather than "the homepage feels off"; and redesign the touchpoints so people feel value before they're asked to pay.
+
+**What I'd instrument:** homepage-to-content engagement rate, trial-to-paid conversion, whether a new subscriber plays anything within 24 hours, and homepage bounce rate.
+
+</Accordion>
 
 <SectionLabel>Research</SectionLabel>
 
@@ -164,15 +165,33 @@ Six problems produced more HMWs than I could build. The four directions below ar
     caption="The full homepage, hero to footer. The redesign runs 40% longer than the audited page — every extra pixel is a show, a trust signal, or a reason to keep scrolling. Pricing shows up two-thirds of the way down, after four separate content proof points."
 />
 
-### Key decisions
+### Four decisions
 
-**Leading with content, not tiers.** The homepage hero was the single most consequential decision in the build. Replacing the pricing table with a full-bleed featured series meant every downstream screen could stop doing conversion work and start doing something more useful: building investment. The contextual paywalls, the plans page, the post-purchase experience all became more honest once the homepage stopped pretending the user had already decided to pay.
+<Decision call="Lead with content, not pricing tiers." where="Homepage hero · RP1">
 
-**Delaying the paywall until after investment.** The end-of-episode gate fires after Episode 1 completes, not at the door. The prompt says "Episode 2 is waiting," framing continuity, not purchase. The trial offer explicitly says "no credit card required," addressing the sharpest single finding from the interviews: Andrew's stated condition under which he would try the platform.
+The single most consequential call in the build. Replacing the pricing table with a full-bleed featured series freed every downstream screen from doing conversion work. The paywalls, plans page and post-purchase screen all got more honest once the homepage stopped pretending the visitor had already decided to pay.
 
-**The Trust Strip.** A horizontal band below the hero surfacing four proof points: first episode free (no account), human-translated subtitles (reviewed by editors, never AI), same-day simulcast, and a 14-day no-card trial. Each pillar maps directly to a root problem, and the strip exists to counter the reputation damage before the user acts on it. This is the throughline of the project: turning a qualitative interview finding into a specific, shippable UI pattern, not just a slide.
+</Decision>
 
-**"Start Here" for undecided visitors.** A three-question, skippable flow (mood, time available, familiarity with anime) returns 2-3 personalized picks with editorial, human-voiced blurbs instead of algorithmic tags. It deliberately avoids asking "what genre do you like," since the research showed newcomers don't have that vocabulary yet.
+<Decision call="Move the paywall to after Episode 1, not the front door." where="End-of-episode gate · RP4">
+
+The gate fires when the episode ends. The prompt reads "Episode 2 is waiting" — continuity, not purchase. The trial says "no credit card required," which was Andrew's stated condition for trying the platform at all.
+
+</Decision>
+
+<Decision call="Turn the sharpest interview finding into a UI component." where="Trust Strip · RP3">
+
+A band below the hero carrying four proof points: first episode free with no account, human-translated subtitles reviewed by editors, same-day simulcast, and a 14-day no-card trial. Each pillar answers a specific root problem, and it sits above the fold so it counters the reputation damage before the visitor acts on it.
+
+This is the throughline of the project — a qualitative finding becoming a shippable pattern rather than a slide.
+
+</Decision>
+
+<Decision call="Ask three questions, and never one about genre." where="Start Here flow · RP4">
+
+A skippable flow asking mood, time available, and familiarity, returning two or three picks with human-written blurbs instead of algorithmic tags. It avoids "what genre do you like" on purpose: the research showed newcomers don't have that vocabulary yet.
+
+</Decision>
 
 <Compare
     before="/crunchyroll-reimagined-img/before-episode-paywall.png"
@@ -206,9 +225,30 @@ The checkout itself had the same problem, just further downstream. Every CTA on 
 
 ## Testing it on real people.
 
-I ran a usability test on the live prototype with 12 participants (June 12–18, 2026) — six returning from the original interviews, six new. Four tasks, mapped back to the six root problems: homepage first impression, free-episode browse, end-of-episode paywall, and the post-purchase welcome screen.
+<StatGrid>
+  <Stat value="12" label="Participants" note="6 returning from the interviews, 6 new" />
+  <Stat value="4" label="Tasks" note="Mapped back to the six root problems" />
+  <Stat value="4.42/5" label="Top score" note="Clarity of what to do next after subscribing" />
+  <Stat value="7 days" label="Fieldwork" note="June 12–18, 2026" />
+</StatGrid>
 
-**The two biggest wins matched the two biggest problems from the research.** The content-first homepage and the redesigned welcome screen were the two screens participants most often flagged as noticeably different from the original — and the welcome screen scored highest of any question in the study (4.42/5 on "clarity of what to do next after subscribing"). One returning participant put it plainly: the original homepage is *"just a big ad for the paid service, there's no anime."* The prototype *"makes it feel more like the platform is really a place to watch shows rather than steal your money every month."*
+The two biggest wins matched the two biggest problems from the research.
+
+<ResultGrid>
+
+<Result kind="win" title="The welcome screen scored highest in the study.">
+
+4.42/5 on clarity of what to do next. Nine of twelve named it the screen most changed from the original — the same screen the audit found most broken.
+
+</Result>
+
+<Result kind="win" title="The homepage stopped reading as an advert.">
+
+Eight of twelve flagged it as noticeably different. One returning participant: the original is *"just a big ad for the paid service, there's no anime,"* while the prototype *"makes it feel more like the platform is really a place to watch shows rather than steal your money every month."*
+
+</Result>
+
+</ResultGrid>
 
 <Figure
     src="/crunchyroll-reimagined-img/Image of Crunchyroll comparison post-purchase welcome.png"
@@ -216,18 +256,48 @@ I ran a usability test on the live prototype with 12 participants (June 12–18,
     caption="Before: the first thing a new subscriber sees is a Forza Horizon 6 cross-promotion. After: a confirmation and a single CTA back to the episode that drove the subscription."
 />
 
-**Testing also caught real mistakes.** The "Start Here" recommendation engine matched a participant who selected "one sitting" as their available time with One Piece — a 1,100+ episode series. It scored recommendations by genre and familiarity but never filtered by runtime, which is exactly the kind of failure that undercuts the trust the feature was built to repair. Both participants who tested on mobile hit real bugs — broken nav links, an episode player that fast-forwarded through the whole video — that a designer-only mobile sweep never surfaced. And the non-functional search bar came up unprompted from four separate participants, independently reproducing Jongwoo's original "Where's the search?" finding for the third time across this project.
+It also caught three things I had missed.
 
-**Copy sourced from interview language consistently outperformed copy sourced from design intent.** The Trust Strip's "no credit card, cancel anytime" — lifted almost verbatim from Andrew's stated condition for trying the platform — tested cleanly. The Trending Row's header, "What critics and fans agree on," was written from what the section was trying to accomplish rather than from how anyone actually talks about a show being popular, and multiple participants flagged it as vague.
+<ResultGrid>
+
+<Result kind="miss" title="&quot;One sitting&quot; returned a 1,100-episode series.">
+
+The Start Here engine scored on genre and familiarity but never filtered by runtime — so it recommended One Piece. Exactly the failure that undercuts the trust the feature exists to repair.
+
+</Result>
+
+<Result kind="miss" title="Both mobile testers hit bugs I never saw.">
+
+Broken nav links and a player that fast-forwarded the whole episode. I had done the 375px sweep myself and called it done — you only click the things you already know work.
+
+</Result>
+
+<Result kind="miss" title="Search surfaced for the third time.">
+
+Four participants asked for it unprompted, independently reproducing a finding from the original interviews. Three separate research events, no fix between them.
+
+</Result>
+
+</ResultGrid>
+
+<Accordion title="One more pattern: copy taken from interviews beat copy written from intent" note="Trust Strip vs Trending Row">
+
+The Trust Strip's "no credit card, cancel anytime" was lifted almost verbatim from Andrew's stated condition for trying the platform, and tested cleanly.
+
+The Trending Row's header — "What critics and fans agree on" — was written from what the section was *trying to do* rather than how anyone actually talks about a popular show. Multiple participants flagged it as vague. Same principle the whole project is built on, applied inconsistently inside my own prototype.
+
+</Accordion>
 
 <SectionLabel>Reflection</SectionLabel>
 
 ## What I took away.
 
-The hardest problem in this case study wasn't any single screen; it was the cumulative effect of small decisions across the entire flow. The audited Crunchyroll experience read as adversarial in aggregate, even though no individual screen was catastrophic. The redesign's job was the inverse: make every screen read as cooperative, so the whole thing reads as a platform that genuinely wants you to find something to watch.
+**No single screen was catastrophic. The aggregate was.** The audited experience read as adversarial only when you walked the whole flow — which is why the fix had to be a principle, not a redesign of one page.
 
-The thing I'd tell my past self: commit to the thesis earlier. Once I decided the homepage would lead with content, every other decision followed naturally. The paywalls became contextual because the homepage no longer needed to do the conversion work. The trust strip made sense because the homepage was already welcoming the undecided. The principle governed, and I just had to trust it sooner.
+**Commit to the thesis earlier.** Once the homepage led with content, everything else fell out of it: the paywalls became contextual, the trust strip made sense, the plans page stopped shouting. The principle governed. I just took too long to trust it.
 
-The second thing I'd tell my past self: test on real devices, with real strangers, before you trust your own read on the design. I did a mobile breakpoint sweep myself and called it done — it took two outside participants to find the bugs that sweep missed, because I only ever click the things I already know work. If I ran this again: add a runtime filter to the recommendation logic before any further testing, run a dedicated mobile session separate from the main study, and build the search bar instead of flagging it a fourth time.
+**Test on real devices, with real strangers.** I ran the mobile sweep myself and called it done. Two outside participants found the bugs in minutes, because I only click the things I already know work.
+
+**If I ran this again:** filter the recommendation logic by runtime before any further testing, run a dedicated mobile session, and build the search bar instead of flagging it a fourth time.
 
 **[Get in touch →](/#contact)** if you want to talk through the research or the build.

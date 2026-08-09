@@ -4,8 +4,13 @@ import { Compare } from '@/components/Compare';
 import { StatValue } from '@/components/StatValue';
 import {
   Accordion,
+  Decision,
   ImpactModel,
   ProblemCards,
+  Result,
+  ResultGrid,
+  Stat,
+  StatGrid,
   Table,
   TLDR,
 } from '@/components/CaseBlocks';
@@ -65,4 +70,9 @@ export const mdxComponents: MDXComponents = {
   ImpactModel,
   Table,
   Compare,
+  StatGrid,
+  Stat,
+  Decision,
+  ResultGrid,
+  Result,
 };

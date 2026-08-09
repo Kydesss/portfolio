@@ -1187,6 +1187,117 @@ footer {
 .accordion-body > :first-child { margin-top: 0; }
 .accordion-body p { font-size: 0.95rem; }
 
+/* ───── Study stats ───── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  margin: 2rem 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stat-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1.15rem 1.25rem;
+  background: var(--bg);
+}
+
+.stat-cell-value {
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-cell-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.stat-cell-note {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+
+/* ───── Decision accordions ───── */
+.decision summary { align-items: flex-start; }
+.decision .accordion-title { font-weight: 600; }
+
+.decision > summary::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+
+.decision > summary { position: relative; padding-left: 1.6rem; }
+
+/* ───── Test results ───── */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.result-card {
+  padding: 1.3rem 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.result-card--win { border-color: var(--accent-line); background: var(--accent-soft); }
+
+.result-kind {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border: 1px solid var(--line);
+}
+
+.result-card--win .result-kind {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.result-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 0.4rem;
+}
+
+.result-body,
+.result-body p {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+.result-body p { margin: 0; }
+.result-body p + p { margin-top: 0.5rem; }
+
 /* ───── Problem cards ───── */
 /* Children are a plain markdown ordered list; the grid and card chrome are all
    applied here so the MDX stays readable. */

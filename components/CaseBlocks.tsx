@@ -95,6 +95,81 @@ export function TLDR({
   );
 }
 
+/**
+ * Study-setup metrics, so the shape of a test reads at a glance instead of as
+ * a paragraph of numbers.
+ */
+export function StatGrid({ children }: { children: ReactNode }) {
+  return <div className="stat-grid">{children}</div>;
+}
+
+export function Stat({
+  value,
+  label,
+  note,
+}: {
+  value: string;
+  label: string;
+  note?: string;
+}) {
+  return (
+    <div className="stat-cell">
+      <span className="stat-cell-value">{value}</span>
+      <span className="stat-cell-label">{label}</span>
+      {note && <span className="stat-cell-note">{note}</span>}
+    </div>
+  );
+}
+
+/**
+ * A design decision: the call itself is always visible, the reasoning is behind
+ * the disclosure. Same native <details> as <Accordion>, styled to read as a
+ * decision rather than an aside.
+ */
+export function Decision({
+  call,
+  where,
+  children,
+}: {
+  call: string;
+  where?: string;
+  children: ReactNode;
+}) {
+  return (
+    <details className="accordion decision">
+      <summary>
+        <span className="accordion-title">{call}</span>
+        {where && <span className="accordion-note">{where}</span>}
+        <span className="accordion-chevron" aria-hidden="true" />
+      </summary>
+      <div className="accordion-body">{children}</div>
+    </details>
+  );
+}
+
+/** Test outcomes as cards — wins and misses side by side, not buried in prose. */
+export function ResultGrid({ children }: { children: ReactNode }) {
+  return <div className="result-grid">{children}</div>;
+}
+
+export function Result({
+  kind,
+  title,
+  children,
+}: {
+  kind: 'win' | 'miss';
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className={`result-card result-card--${kind}`}>
+      <span className="result-kind">{kind === 'win' ? 'Win' : 'Miss'}</span>
+      <p className="result-title">{title}</p>
+      <div className="result-body">{children}</div>
+    </div>
+  );
+}
+
 /** Collapsed detail. The finding stays visible; the evidence is one click away. */
 export function Accordion({
   title,
