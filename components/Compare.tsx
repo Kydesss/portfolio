@@ -16,6 +16,7 @@ export function Compare({
   afterAlt,
   beforeLabel = 'Before',
   afterLabel = 'After',
+  title,
   caption,
 }: {
   before: string;
@@ -24,6 +25,8 @@ export function Compare({
   afterAlt: string;
   beforeLabel?: string;
   afterLabel?: string;
+  /** Heading above the slider — see Figure. */
+  title?: string;
   caption?: string;
 }) {
   const [pos, setPos] = useState(50);
@@ -40,6 +43,7 @@ export function Compare({
 
   return (
     <figure className="figure compare">
+      {title && <h3 className="figure-title">{title}</h3>}
       <div
         className="compare-frame"
         ref={frame}

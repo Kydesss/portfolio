@@ -4,8 +4,15 @@ import { Compare } from '@/components/Compare';
 import { StatValue } from '@/components/StatValue';
 import {
   Accordion,
+  Callout,
+  ClaimNote,
+  Decision,
   ImpactModel,
   ProblemCards,
+  Result,
+  ResultGrid,
+  Stat,
+  StatGrid,
   Table,
   TLDR,
 } from '@/components/CaseBlocks';
@@ -30,14 +37,19 @@ export function Outcomes({ items }: { items: { stat: string; desc: string }[] })
 export function Figure({
   src,
   alt,
+  title,
   caption,
 }: {
   src: string;
   alt: string;
+  /** Heading above the image, so a scanning reader gets the point without
+      reading the caption. Rendered as a real h3 for document outline. */
+  title?: string;
   caption?: string;
 }) {
   return (
     <figure className="figure">
+      {title && <h3 className="figure-title">{title}</h3>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} loading="lazy" decoding="async" />
       {caption && <figcaption>{caption}</figcaption>}
@@ -65,4 +77,11 @@ export const mdxComponents: MDXComponents = {
   ImpactModel,
   Table,
   Compare,
+  StatGrid,
+  Stat,
+  Decision,
+  ResultGrid,
+  Result,
+  Callout,
+  ClaimNote,
 };

@@ -261,16 +261,76 @@ main { padding-top: 5rem; }
   border: 1px solid var(--line);
 }
 
+/* Frames are stacked and cross-faded, so the row never reflows as they cycle.
+   The first frame stays visible underneath, which is what renders before
+   hydration and with JS off. */
 .work-thumb img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
   display: block;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Exactly one frame carries .is-active at any time — including in the server
+   HTML, since the component's state starts at 0. Keep this the only rule that
+   raises opacity: earlier attempts also used :first-of-type and :has(), which
+   fought this one and left frames either doubled up or all faded out. */
+.work-thumb img.is-active { opacity: 1; z-index: 1; }
+
 .work-item:hover .work-thumb img { transform: scale(1.06); }
+
+.work-thumb-dots {
+  position: absolute;
+  z-index: 2;
+  right: 0.45rem;
+  bottom: 0.45rem;
+  display: flex;
+  gap: 0.22rem;
+  padding: 0.22rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.work-thumb-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background-color 0.4s ease;
+}
+
+.work-thumb-dots span.is-active { background: #fff; }
+
+.work-thumb-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.work-thumb-play::before {
+  content: '';
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.work-thumb-play { z-index: 1; }
+.work-thumb-play > * { position: relative; }
 
 .work-thumb-fallback {
   position: absolute;
@@ -308,6 +368,14 @@ main { padding-top: 5rem; }
   margin-top: 0.2rem;
   font-size: 0.8rem;
   color: var(--fg-muted);
+}
+
+.work-stat {
+  /* Long stat sentences get elided rather than wrapping the row. */
+  max-width: 34ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .work-stat b {
@@ -870,6 +938,18 @@ footer {
   margin: 0;
 }
 
+/* Heading above a figure. Left-aligned against the prose column even though the
+   caption below is centred — it's a sub-header, not part of the image.
+   Scoped under .prose so it beats `.prose h3`, whose 3rem top margin would
+   otherwise push it away from the image it labels; the figure's own margin
+   already supplies the separation. Size and weight are inherited from
+   `.prose h3` on purpose, so figure headers sit at the same level as the
+   written sub-headers around them. */
+.prose .figure-title {
+  line-height: 1.3;
+  margin: 0 0 0.9rem;
+}
+
 .figure figcaption {
   font-size: 0.85rem;
   color: var(--fg-muted);
@@ -885,47 +965,80 @@ footer {
   -webkit-overflow-scrolling: touch;
 }
 
-.case-table {
+/* Targets the <table> markdown generates inside <Table>, which carries no
+   class of its own — so these must not be scoped to `.case-table`. */
+.case-table-wrap table {
   width: 100%;
-  min-width: 520px;
+  min-width: 560px;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  /* Needed for the radius to clip the header's background. */
+  overflow: hidden;
 }
 
-.case-table th,
-.case-table td {
+.case-table-wrap th,
+.case-table-wrap td {
   text-align: left;
   vertical-align: top;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--line);
-  line-height: 1.5;
+  /* Generous horizontal padding is what actually separates the columns —
+     without it three columns of prose run straight into each other. */
+  padding: 0.95rem 1.35rem;
+  line-height: 1.6;
 }
 
-.case-table thead th {
-  font-size: 0.72rem;
-  font-weight: 600;
+/* Column divider, so a wrapped cell can't be mistaken for its neighbour. */
+.case-table-wrap th + th,
+.case-table-wrap td + td,
+.case-table-wrap th + td {
+  border-left: 1px solid var(--line);
+}
+
+.case-table-wrap thead th {
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  border-bottom-color: var(--fg-muted);
+  /* A step stronger than the zebra rows, or the header stops reading as one. */
+  background: var(--hover);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.case-table-wrap tbody tr + tr th,
+.case-table-wrap tbody tr + tr td {
+  border-top: 1px solid var(--line);
+}
+
+/* Zebra banding carries the eye across a wide row. */
+.case-table-wrap tbody tr:nth-child(even) th,
+.case-table-wrap tbody tr:nth-child(even) td {
+  background: var(--bg-elevated);
+}
+
+.case-table-wrap tbody td { color: var(--fg-muted); }
+
+/* Markdown emits <td> for every body cell, not <th>, so the first column is
+   styled positionally. Names are short — keeping them on one line makes the
+   column read as a label rather than more prose. */
+.case-table-wrap tbody td:first-child {
+  color: var(--fg);
   white-space: nowrap;
 }
 
-.case-table tbody th {
-  font-weight: 500;
-  white-space: nowrap;
-}
+.case-table-wrap tbody td:first-child strong { font-weight: 600; }
 
-.case-table tbody td { color: var(--fg-muted); }
-.case-table tbody tr:last-child th,
-.case-table tbody tr:last-child td { border-bottom: none; }
-.case-table tbody tr:hover td,
-.case-table tbody tr:hover th { background: var(--hover); }
+.case-table-wrap tbody tr:hover th,
+.case-table-wrap tbody tr:hover td { background: var(--hover); }
 
 .case-table-wrap figcaption {
   font-size: 0.85rem;
   color: var(--fg-muted);
-  margin-top: 0.75rem;
+  margin-top: 0.85rem;
 }
 
 /* ───── TL;DR ───── */
@@ -1085,6 +1198,182 @@ footer {
 .accordion-body { padding: 1.25rem 1.25rem 0.4rem; }
 .accordion-body > :first-child { margin-top: 0; }
 .accordion-body p { font-size: 0.95rem; }
+
+/* ───── Claim caveat ───── */
+
+/* Superscript marker on a strong claim, linking down to the caveat that
+   qualifies it. Sized off the heading it sits in rather than fixed, so it
+   stays proportional as the h2 scales. */
+/* Scoped under .prose so it beats `.prose a`, which would otherwise force the
+   marker to body colour with an underline. */
+.prose .claim-note {
+  font-size: 0.5em;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  vertical-align: super;
+  margin-left: 0.15em;
+  text-decoration: none;
+}
+
+.prose .claim-note:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+}
+
+.prose .claim-note:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.callout {
+  margin: 2rem 0;
+  padding: 1.5rem 1.6rem;
+  border: 1px solid var(--accent-line);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent-soft);
+  /* Clear the nav when the headline's asterisk jumps here. */
+  scroll-margin-top: 6rem;
+}
+
+.callout-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+}
+
+.callout-body p { font-size: 0.95rem; line-height: 1.6; }
+.callout-body p:last-child { margin-bottom: 0; }
+
+/* Brief highlight so the reader can see what the asterisk pointed at. */
+.callout:target {
+  animation: callout-flash 2.2s ease;
+}
+
+@keyframes callout-flash {
+  0%, 45% { box-shadow: 0 0 0 3px var(--accent); }
+  100% { box-shadow: 0 0 0 3px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .callout:target { animation: none; box-shadow: 0 0 0 3px var(--accent); }
+}
+
+/* ───── Study stats ───── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  margin: 2rem 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stat-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1.15rem 1.25rem;
+  background: var(--bg);
+}
+
+.stat-cell-value {
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-cell-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.stat-cell-note {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+
+/* ───── Decision accordions ───── */
+.decision summary { align-items: flex-start; }
+.decision .accordion-title { font-weight: 600; }
+
+.decision > summary::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+
+.decision > summary { position: relative; padding-left: 1.6rem; }
+
+/* ───── Test results ───── */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.result-card {
+  padding: 1.3rem 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.result-card--win { border-color: var(--accent-line); background: var(--accent-soft); }
+
+.result-kind {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border: 1px solid var(--line);
+}
+
+.result-card--win .result-kind {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.result-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 0.4rem;
+}
+
+.result-body,
+.result-body p {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+.result-body p { margin: 0; }
+.result-body p + p { margin-top: 0.5rem; }
 
 /* ───── Problem cards ───── */
 /* Children are a plain markdown ordered list; the grid and card chrome are all
