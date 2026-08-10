@@ -3,7 +3,7 @@
 
 export const siteConfig = {
     name: "Joaquin Pacia",
-    role: "UI / UX Designer · Multimedia Producer",
+    role: "UI / UX Designer",
     location: "Mississauga, ON",
     status: "Open to junior product design roles",
     // Shown under "Latest" in the hero. Keep this a verifiable proof point, not
@@ -24,6 +24,11 @@ export const siteConfig = {
 
     // CV
     experience: [
+        {
+            year: "May 2025 - Present",
+            role: "Independent UI/UX Designer & Front-End Developer",
+            org: "Self-Employed · Mississauga, ON",
+        },
         {
             year: "Nov 2024 - Jan 2025",
             role: "Website & UI/UX Designer",
