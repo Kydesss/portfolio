@@ -170,6 +170,42 @@ export function Result({
   );
 }
 
+/**
+ * A visible caveat, linkable from the claim it qualifies.
+ *
+ * Deliberately not an <Accordion>: a qualification on a strong claim has to be
+ * readable without being opened, or the claim stands unqualified for anyone
+ * who doesn't click.
+ */
+export function Callout({
+  id,
+  label,
+  children,
+}: {
+  id?: string;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <aside id={id} className="callout">
+      <p className="callout-label">{label}</p>
+      <div className="callout-body">{children}</div>
+    </aside>
+  );
+}
+
+/**
+ * Superscript marker linking a claim to its caveat. Screen readers get the full
+ * "see the caveat" wording rather than a bare asterisk.
+ */
+export function ClaimNote({ href = '#postscript' }: { href?: string }) {
+  return (
+    <a className="claim-note" href={href} aria-label="Read the caveat on this claim">
+      <span aria-hidden="true">*</span>
+    </a>
+  );
+}
+
 /** Collapsed detail. The finding stays visible; the evidence is one click away. */
 export function Accordion({
   title,

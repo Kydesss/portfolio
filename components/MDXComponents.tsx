@@ -4,6 +4,8 @@ import { Compare } from '@/components/Compare';
 import { StatValue } from '@/components/StatValue';
 import {
   Accordion,
+  Callout,
+  ClaimNote,
   Decision,
   ImpactModel,
   ProblemCards,
@@ -80,4 +82,6 @@ export const mdxComponents: MDXComponents = {
   Decision,
   ResultGrid,
   Result,
+  Callout,
+  ClaimNote,
 };
