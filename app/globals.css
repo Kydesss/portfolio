@@ -1260,14 +1260,15 @@ footer {
   height: auto;
 }
 
+/* Sits above its clip as a header, not below it as a caption. */
 .flow-label {
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  margin-top: 0.95rem;
-  font-size: 1rem;
+  margin-bottom: 0.85rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .flow-emoji { font-size: 1.15rem; line-height: 1; }

@@ -40,6 +40,16 @@ function Flow({ flow }: { flow: WorkFlow }) {
 
   return (
     <figure className="flow">
+      {/* Caption first: a <figcaption> is valid as either the first or last
+          child, and the label reads as a header for the clip beneath it. */}
+      <figcaption className="flow-label">
+        {flow.emoji && (
+          <span className="flow-emoji" aria-hidden="true">
+            {flow.emoji}
+          </span>
+        )}
+        {flow.label}
+      </figcaption>
       <div className="flow-media">
         <video
           ref={ref}
@@ -49,19 +59,11 @@ function Flow({ flow }: { flow: WorkFlow }) {
           loop
           playsInline
           preload="none"
-          // Decorative: the label below names the flow.
+          // Decorative: the label above names the flow.
           aria-hidden="true"
           tabIndex={-1}
         />
       </div>
-      <figcaption className="flow-label">
-        {flow.emoji && (
-          <span className="flow-emoji" aria-hidden="true">
-            {flow.emoji}
-          </span>
-        )}
-        {flow.label}
-      </figcaption>
     </figure>
   );
 }
