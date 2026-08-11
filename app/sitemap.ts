@@ -35,5 +35,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // Case studies are the pages worth ranking, so they outrank the gallery.
       priority: 0.8,
     })),
+    // Projects with flows split in two: the showcase above, the written case
+    // study here. Only those slugs have a /process route.
+    ...work
+      .filter((item) => (item.frontmatter.flows?.length ?? 0) > 0)
+      .map((item) => ({
+        url: absoluteUrl(`/work/${item.slug}/process`),
+        lastModified: getWorkLastModified(item.slug) ?? newestWork,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      })),
   ];
 }

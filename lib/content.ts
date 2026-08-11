@@ -24,6 +24,17 @@ export type WorkFrontmatter = {
   // Frames cycled by the work-list thumbnail. Prefer images wider than they
   // are tall — the slot is 16:10 and crops from the centre.
   thumbnails?: string[];
+  // Looping flow demos. When present, /work/<slug> becomes a work-first
+  // showcase and the written case study moves to /work/<slug>/process.
+  flows?: WorkFlow[];
+};
+
+/** One looping demo on a case study's showcase page. */
+export type WorkFlow = {
+  src: string;
+  poster: string;
+  label: string;
+  emoji?: string;
 };
 
 // Normalize a YouTube/Vimeo URL into an embeddable src. Returns null if unrecognized.

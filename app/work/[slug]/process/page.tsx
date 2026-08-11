@@ -1,16 +1,14 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
-    getAllWorkSlugs,
+    getAllWork,
     getWorkBySlug,
-    getAdjacentWork,
     getWorkLastModified,
 } from "@/lib/content";
 import { Footer } from "@/components/Footer";
 import { Lightbox } from "@/components/Lightbox";
 import { JsonLd } from "@/components/JsonLd";
 import { CaseStudyBody } from "@/components/CaseStudyBody";
-import { Showcase } from "@/components/Showcase";
 import {
     absoluteUrl,
     breadcrumbSchema,
@@ -24,34 +22,34 @@ type PageProps = {
     params: Promise<{ slug: string }>;
 };
 
+/**
+ * Only projects with flows split into showcase + process. Everything else keeps
+ * the written case study at /work/<slug>, so this route must not exist for them
+ * — two URLs serving the same content would be a duplicate.
+ */
 export async function generateStaticParams() {
-    return getAllWorkSlugs().map((slug) => ({ slug }));
+    return getAllWork()
+        .filter((w) => (w.frontmatter.flows?.length ?? 0) > 0)
+        .map((w) => ({ slug: w.slug }));
 }
+
+export const dynamicParams = false;
 
 export async function generateMetadata({
     params,
-}: {
-    params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
     const { slug } = await params;
     const work = getWorkBySlug(slug);
     if (!work) return {};
 
     const { frontmatter } = work;
-    const path = `/work/${slug}`;
-    const hasFlows = (frontmatter.flows?.length ?? 0) > 0;
-    // A showcase page is the work itself; only the /process route is the
-    // written case study, so don't label both the same way in search results.
-    const title = hasFlows
-        ? `${frontmatter.title} — Product Design`
-        : `${frontmatter.title} — UX Case Study`;
+    const path = `/work/${slug}/process`;
+    const title = `${frontmatter.title} — UX Case Study`;
     const modified = getWorkLastModified(slug);
 
     return {
         title,
         description: frontmatter.summary,
-        // Frontmatter `tag` reads like "Web · UX Design · Streaming Services";
-        // split it into real keyword terms.
         keywords: frontmatter.tag
             .split("·")
             .map((t) => t.trim())
@@ -74,24 +72,18 @@ export async function generateMetadata({
     };
 }
 
-export default async function WorkPage({ params }: PageProps) {
+export default async function ProcessPage({ params }: PageProps) {
     const { slug } = await params;
     const work = getWorkBySlug(slug);
 
-    if (!work) notFound();
+    if (!work || (work.frontmatter.flows?.length ?? 0) === 0) notFound();
 
-    const { next } = getAdjacentWork(slug);
     const { frontmatter } = work;
-    const hasFlows = (frontmatter.flows?.length ?? 0) > 0;
-
-    const path = `/work/${slug}`;
+    const path = `/work/${slug}/process`;
     const modified = getWorkLastModified(slug);
 
     return (
         <main id="main-content" tabIndex={-1}>
-            {/* CreativeWork rather than Article: a case study has no publication
-                date to claim, and Article's rich results expect one. dateModified
-                comes from the source file's real mtime. */}
             <JsonLd
                 data={{
                     "@context": "https://schema.org",
@@ -100,7 +92,7 @@ export default async function WorkPage({ params }: PageProps) {
                             "@type": "CreativeWork",
                             "@id": `${absoluteUrl(path)}#case-study`,
                             url: absoluteUrl(path),
-                            name: frontmatter.title,
+                            name: `${frontmatter.title} — case study`,
                             headline: frontmatter.title,
                             abstract: frontmatter.summary,
                             description: frontmatter.summary,
@@ -123,44 +115,28 @@ export default async function WorkPage({ params }: PageProps) {
                         breadcrumbSchema([
                             { name: "Home", path: "/" },
                             { name: "Work", path: "/#work" },
-                            { name: frontmatter.title, path },
+                            { name: frontmatter.title, path: `/work/${slug}` },
+                            { name: "Case study", path },
                         ]),
                     ],
                 }}
             />
 
-            {hasFlows ? (
-                <Showcase work={work} slug={slug} />
-            ) : (
-                <CaseStudyBody
-                    work={work}
-                    backHref="/#work"
-                    backLabel="Back to work"
-                />
-            )}
+            <CaseStudyBody
+                work={work}
+                backHref={`/work/${slug}`}
+                backLabel="Back to the work"
+            />
 
-            {/* Next case */}
-            {next ? (
-                <Link href={`/work/${next.slug}`} className="next-case">
-                    <div className="container">
-                        <div className="next-label">Next case study</div>
-                        <div className="next-title">
-                            <span>{next.frontmatter.title}</span>
-                            <span className="arrow">→</span>
-                        </div>
+            <Link href={`/work/${slug}`} className="next-case">
+                <div className="container">
+                    <div className="next-label">Back to the work</div>
+                    <div className="next-title">
+                        <span>See the flows again</span>
+                        <span className="arrow">→</span>
                     </div>
-                </Link>
-            ) : (
-                <Link href="/#work" className="next-case">
-                    <div className="container">
-                        <div className="next-label">Back to all work</div>
-                        <div className="next-title">
-                            <span>See more projects</span>
-                            <span className="arrow">→</span>
-                        </div>
-                    </div>
-                </Link>
-            )}
+                </div>
+            </Link>
 
             <Footer />
             <Lightbox />
