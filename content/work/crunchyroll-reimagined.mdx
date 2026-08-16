@@ -59,16 +59,12 @@ outcomes:
       desc: "Competitor homepages leading with price instead of content. Crunchyroll was the outlier — and moved to a content-first homepage after this study."
 ---
 
-<SectionLabel>The Challenge</SectionLabel>
-
-## Crunchyroll sold the subscription before it showed the anime. Then it shipped the same fix.<ClaimNote />
-
 <TLDR
-  problem="Crunchyroll's homepage led with a pricing table and a countdown timer — before a single trailer. Every one of my 8 interview participants reacted negatively to it, without exception."
-  approach="8 interviews · full audit of the live signup flow · 4 redesigned touchpoints · a working React prototype · a 12-person usability test"
-  result="4.42/5 on the redesigned welcome screen, the highest score in the study. 4 of 6 lapsed users said their objections were addressed. Crunchyroll moved to a content-first homepage after this study was conducted."
-  prototype="https://crunchyroll-reimagined.vercel.app/"
-  repo="https://github.com/jpop0393/crunchyroll-reimagined"
+    problem="Crunchyroll's homepage led with a pricing table and a countdown timer — before a single trailer. Every one of my 8 interview participants reacted negatively to it, without exception."
+    approach="8 interviews · full audit of the live signup flow · 4 redesigned touchpoints · a working React prototype · a 12-person usability test"
+    result="4.42/5 on the redesigned welcome screen, the highest score in the study. 4 of 6 lapsed users said their objections were addressed. Crunchyroll moved to a content-first homepage after this study was conducted."
+    prototype="https://crunchyroll-reimagined.vercel.app/"
+    repo="https://github.com/jpop0393/crunchyroll-reimagined"
 />
 
 <ImpactModel
@@ -77,14 +73,18 @@ outcomes:
   disclaimer="This is an opportunity size, not a result. It uses public subscriber and revenue figures plus a standard industry benchmark to show what this class of change is worth. I did not run a live A/B test and make no claim to have moved conversion. Everything below the fold is measured, from a 12-participant usability study."
 >
 
-| Input | Value |
-| --- | --- |
-| Paid subscribers | 21M (Sony, 2026) |
-| Blended ARPU | ~$50/yr, from $1B+ reported revenue |
-| Benchmark lift, one conversion change | 2–3% |
-| **Value of 2 points** | **≈ 420,000 subscribers · ≈ $21M/yr** |
+| Input                                 | Value                                 |
+| ------------------------------------- | ------------------------------------- |
+| Paid subscribers                      | 21M (Sony, 2026)                      |
+| Blended ARPU                          | ~$50/yr, from $1B+ reported revenue   |
+| Benchmark lift, one conversion change | 2–3%                                  |
+| **Value of 2 points**                 | **≈ 420,000 subscribers · ≈ $21M/yr** |
 
 </ImpactModel>
+
+<SectionLabel>The Challenge</SectionLabel>
+
+## Crunchyroll sold the subscription before it showed the anime. Then it shipped the same fix.<ClaimNote />
 
 Crunchyroll has the catalog, the simulcasts, and the community. And yet anime fans who _could_ subscribe don't — they stay on piracy sites, share accounts, or churn soon after signing up. This project set out to answer why.
 
@@ -122,10 +122,18 @@ I have no evidence they ever saw this work, and I make no claim that they did. T
 ## Eight interviews. Not one person defended the homepage.
 
 <StatGrid>
-  <Stat value="8" label="Interviews" note="Semi-structured, May 8–11 2026" />
-  <Stat value="0" label="Subscribers" note="Every participant was lapsed, free-tier, or new to anime" />
-  <Stat value="10" label="Themes" note="Collapsed into six root problems" />
-  <Stat value="4" label="Sources" note="App Store, Reddit, Trustpilot and PCMag, to validate at scale" />
+    <Stat value="8" label="Interviews" note="Semi-structured, May 8–11 2026" />
+    <Stat
+        value="0"
+        label="Subscribers"
+        note="Every participant was lapsed, free-tier, or new to anime"
+    />
+    <Stat value="10" label="Themes" note="Collapsed into six root problems" />
+    <Stat
+        value="4"
+        label="Sources"
+        note="App Store, Reddit, Trustpilot and PCMag, to validate at scale"
+    />
 </StatGrid>
 
 ### Five personas, five reasons not to pay
@@ -134,13 +142,13 @@ Every design direction targets one or two of these specifically, not "users" in 
 
 <Table>
 
-| Persona | Why they don't pay | What it drove in the redesign |
-| --- | --- | --- |
-| **Piracy Pragmatist** | A frictionless free habit that's hard to beat on convenience, let alone price | Free first episode, no account required |
-| **Lapsed Subscriber** | Paid before, drifted away, remembers a better version of the platform | Post-purchase welcome screen |
-| **Value Analyst** | Runs the actual math and isn't convinced | Pricing moved below four content proof points |
-| **Anime Curious** | Hasn't committed to the medium yet, and lacks the vocabulary for it | "Start Here" flow that never asks about genre |
-| **Passive Browser** | Arrives goal-directed, just wants to search for one title | Search — still unbuilt, and the study's sharpest miss |
+| Persona               | Why they don't pay                                                            | What it drove in the redesign                         |
+| --------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------- |
+| **Piracy Pragmatist** | A frictionless free habit that's hard to beat on convenience, let alone price | Free first episode, no account required               |
+| **Lapsed Subscriber** | Paid before, drifted away, remembers a better version of the platform         | Post-purchase welcome screen                          |
+| **Value Analyst**     | Runs the actual math and isn't convinced                                      | Pricing moved below four content proof points         |
+| **Anime Curious**     | Hasn't committed to the medium yet, and lacks the vocabulary for it           | "Start Here" flow that never asks about genre         |
+| **Passive Browser**   | Arrives goal-directed, just wants to search for one title                     | Search — still unbuilt, and the study's sharpest miss |
 
 </Table>
 
@@ -170,12 +178,12 @@ Even HIDIVE — a platform its own users call worse-designed than Crunchyroll �
 
 <Table caption="Competitive audit, May 2026. The outlier is the one that has to convince people to pay.">
 
-| Platform | What's above the fold | Leads with |
-| --- | --- | --- |
-| **Netflix** | Full-bleed featured title, then rows | Content |
-| **HIDIVE** | Simulcast hero and catalog | Content |
-| **Piracy site** | Latest episodes grid | Content |
-| **Crunchyroll** | Pricing comparison table with a countdown timer | **Price** |
+| Platform        | What's above the fold                           | Leads with |
+| --------------- | ----------------------------------------------- | ---------- |
+| **Netflix**     | Full-bleed featured title, then rows            | Content    |
+| **HIDIVE**      | Simulcast hero and catalog                      | Content    |
+| **Piracy site** | Latest episodes grid                            | Content    |
+| **Crunchyroll** | Pricing comparison table with a countdown timer | **Price**  |
 
 </Table>
 
@@ -197,9 +205,9 @@ That matters because it moves RP3 out of the realm of vibes. Participants weren'
 
 ### Every problem became a How-Might-We before any screen got drawn
 
-> *"How might we redesign the first 10 seconds of the homepage so a visitor encounters content, not pricing, and feels curious enough to stay?"* — from RP1
+> _"How might we redesign the first 10 seconds of the homepage so a visitor encounters content, not pricing, and feels curious enough to stay?"_ — from RP1
 >
-> *"How might we eliminate the gap between what 'Start Free Trial' promises and what the signup flow actually delivers?"* — from RP4
+> _"How might we eliminate the gap between what 'Start Free Trial' promises and what the signup flow actually delivers?"_ — from RP4
 
 Six problems produced more HMWs than a solo three-week build could ship. Four survived.
 
@@ -279,10 +287,18 @@ Every CTA said "Start Free Trial." Checkout charged CA$2.99 immediately. Andrew'
 ## Testing it on real people.
 
 <StatGrid>
-  <Stat value="12" label="Participants" note="6 returning from the interviews, 6 new" />
-  <Stat value="4" label="Tasks" note="Mapped back to the six root problems" />
-  <Stat value="4.42/5" label="Top score" note="Clarity of what to do next after subscribing" />
-  <Stat value="7 days" label="Fieldwork" note="June 12–18, 2026" />
+    <Stat
+        value="12"
+        label="Participants"
+        note="6 returning from the interviews, 6 new"
+    />
+    <Stat value="4" label="Tasks" note="Mapped back to the six root problems" />
+    <Stat
+        value="4.42/5"
+        label="Top score"
+        note="Clarity of what to do next after subscribing"
+    />
+    <Stat value="7 days" label="Fieldwork" note="June 12–18, 2026" />
 </StatGrid>
 
 ### The two biggest wins matched the two biggest problems
@@ -297,7 +313,7 @@ Every CTA said "Start Free Trial." Checkout charged CA$2.99 immediately. Andrew'
 
 <Result kind="win" title="The homepage stopped reading as an advert.">
 
-Eight of twelve flagged it as noticeably different. One returning participant: the original is *"just a big ad for the paid service, there's no anime,"* while the prototype *"makes it feel more like the platform is really a place to watch shows rather than steal your money every month."*
+Eight of twelve flagged it as noticeably different. One returning participant: the original is _"just a big ad for the paid service, there's no anime,"_ while the prototype _"makes it feel more like the platform is really a place to watch shows rather than steal your money every month."_
 
 </Result>
 
@@ -338,7 +354,7 @@ Four participants asked for it unprompted, independently reproducing a finding f
 
 The Trust Strip's "no credit card, cancel anytime" was lifted almost verbatim from Andrew's stated condition for trying the platform, and tested cleanly.
 
-The Trending Row's header — "What critics and fans agree on" — was written from what the section was *trying to do* rather than how anyone actually talks about a popular show. Multiple participants flagged it as vague. Same principle the whole project is built on, applied inconsistently inside my own prototype.
+The Trending Row's header — "What critics and fans agree on" — was written from what the section was _trying to do_ rather than how anyone actually talks about a popular show. Multiple participants flagged it as vague. Same principle the whole project is built on, applied inconsistently inside my own prototype.
 
 </Accordion>
 

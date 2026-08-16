@@ -20,7 +20,7 @@ export const siteConfig = {
         "A paywall. A first visit. An ER intake form. An intruder at the door. Five case studies about the highest-pressure screens in a product, and what changes when you get them right.",
 
     // About section — supports paragraphs. Use \n\n between paragraphs.
-    about: `Hi, I'm Joaquin — a UofT graduate (High Distinction) and UI/UX designer who believes fun is equal to success. \n\n I love turning messy problems into clean, intuitive interfaces, with a background that blends Figma-driven UI/UX work, multimedia production, and a healthy obsession for tech (the kind that has me self-hosting services and tinkering with Linux on the weekends). \n\n I bring both a creator's eye and a problem-solver's mindset to every project — whether that's a 53-test-case usability study or a Lottie animation handoff to engineering.`,
+    about: `I'm Joaquin, a UI/UX designer who turns messy problems into clean, intuitive interfaces. \n\n I bring both a creator's eye and a problem-solver's mindset to every project — whether that's a 53-test-case usability study, Figma-driven UI work, or a Lottie animation handoff to engineering. I believe fun is equal to success, and I'm passionate about solving the highest-pressure moments in products.`,
 
     // CV
     experience: [
@@ -81,7 +81,11 @@ export const siteConfig = {
         { name: "Illustrator", icon: "logos:adobe-illustrator", core: true },
         { name: "Photoshop", icon: "logos:adobe-photoshop", core: true },
         { name: "InDesign", icon: "logos:adobe-indesign", core: true },
-        { name: "After Effects", icon: "logos:adobe-after-effects", core: true },
+        {
+            name: "After Effects",
+            icon: "logos:adobe-after-effects",
+            core: true,
+        },
         { name: "Premiere Pro", icon: "logos:adobe-premiere", core: true },
         // { name: "Descript", icon: "logos:descript-icon" },
 
